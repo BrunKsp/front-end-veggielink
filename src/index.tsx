@@ -2,6 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import Routess from "./routes/routes";
+declare global {
+  interface Window {
+    PUBLIC_URL: string;
+  }
+}
+window.PUBLIC_URL = process.env.REACT_APP_PUBLIC_URL || '';
 
 ReactDOM.render(
   <React.StrictMode>
