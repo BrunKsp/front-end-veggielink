@@ -21,12 +21,26 @@ VeggieLink é um aplicativo de monitoramento e rastreamento que visa facilitar o
 - .Net para o backend
 - MongoDb para o banco de dados
 
-# Startar Projeto
-Deve se ter instalado o NodeJs
-rodar comando para instalar as dependências do projeto
-```ssh
-yarn ##ou npm i 
-```
+## Como Executar o Projeto
+
+1. **Pré-requisitos:**
+   - Node.js instalado na sua máquina
+   - NPM ou Yarn instalado
+
+2. **Clonar o repositório:**
+   ```bash
+   git clone https://github.com/apps-abo/frontend-admin-apps.git
+
+3. **Instalar as dependências:**
+
+    ```bash 
+    npm install  # ou yarn
+
+4. **Rodar o servidor de desenvolvimento:**
+    ```bash
+    npm run start   # ou yarn start
+    Abra seu navegador e vá para http://localhost:3000.
+
 
 ## Acesso ao back-end
 As informações de acesso aos back-end devem estar no arquivo .env na pasta src 
