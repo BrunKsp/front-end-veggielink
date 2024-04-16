@@ -1,46 +1,36 @@
-# Getting Started with Create React App
+# VeggieLink
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Descrição do Projeto
+VeggieLink é um aplicativo de monitoramento e rastreamento que visa facilitar o cultivo de hortaliças e demais produtores do agricultor familiar, desde o plantio até o consumidor final. Ele oferece uma plataforma abrangente que permite aos usuários monitorar o estágio de produção dos seus produtos, receber orientações personalizadas, interagir com outros cultivadores na comunidade e até mesmo vender seus produtos diretamente aos consumidores locais.
 
-## Available Scripts
+## Principais Recursos
+- **Monitoramento do Crescimento:** Registre e acompanhe o progresso do crescimento de suas hortaliças, incluindo datas de plantio, irrigação, fertilização e condições climáticas.
+- **Orientações Personalizadas:** Receba recomendações específicas para otimizar o crescimento e a colheita das suas plantas, com base nos dados coletados.
+- **Comunidade e Compartilhamento:** Interaja com outros usuários, compartilhe experiências, dicas e fotos de suas hortas, e aprenda com a comunidade.
 
-In the project directory, you can run:
 
-### `npm start`
+## Contribuição
+1. Faça um fork do projeto
+2. Crie uma nova branch: `git checkout -b feature/nova-feature`
+3. Faça suas alterações e commit: `git commit -m 'Adiciona nova feature'`
+4. Faça push para a branch: `git push origin feature/nova-feature`
+5. Envie um pull request
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Tecnologias Utilizadas
+- React.js para o frontend
+- .Net para o backend
+- MongoDb para o banco de dados
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+# Startar Projeto
+Deve se ter instalado o NodeJs
+rodar comando para instalar as dependências do projeto
+```ssh
+yarn ##ou npm i 
+```
 
-### `npm test`
+## Acesso ao back-end
+As informações de acesso aos back-end devem estar no arquivo .env na pasta src 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Autor
+Este projeto foi desenvolvido por [Bruno Siqueira](https://github.com/BrunKsp).
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
