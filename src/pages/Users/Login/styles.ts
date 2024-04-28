@@ -26,6 +26,16 @@ export const Card = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  h4 {
+    margin-top: 10px;
+    margin-right: 40px;
+    font-size: 12px;
+    display: flex;
+    align-items: start;
+    font-weight: 800;
+    justify-content: flex-start;
+  }
+
   @media (max-width: 768px) {
     //width: 90%;
     padding: 5%;

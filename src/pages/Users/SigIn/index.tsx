@@ -13,7 +13,7 @@ import { DivText, FlexWrap, Logo, MainPage, Image, Card } from "./styles";
 import { VisibilityOff, Visibility } from "@mui/icons-material";
 import { login } from "../../../services/User";
 interface IForm {
-  nome: string;  
+  nome: string;
   email: string;
   segmento?: string;
   senha: string;
@@ -27,7 +27,7 @@ const validationSchema = yup.object({
   senha: yup.string().required("Campo obrigatório"),
   segmento: yup.string(),
   foto: yup.string(),
-  descricao : yup.string().length(150),
+  descricao: yup.string().length(150),
 });
 
 export default function SigIn() {
@@ -64,7 +64,7 @@ export default function SigIn() {
   }, []);
 
   const handleChange =
-    (name: "email" | "senha" |"nome"|"segmento"|"foto"|"descricao") =>
+    (name: "email" | "senha" | "nome" | "segmento" | "foto" | "descricao") =>
     (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       setValue(name, e.target.value, { shouldValidate: true });
     };
@@ -76,11 +76,11 @@ export default function SigIn() {
         <Card>
           <FlexWrap>
             <DivText>
-              <h1>Bem Vindo</h1>
+              <h1>Cadastre-se</h1>
             </DivText>
             <Image>
               <Logo
-                src={require("../../../Images/LogoVeggie.png")}
+                src={require("../../../assets/Images/LogoVeggie.png")}
                 alt="logo"
               />
             </Image>
@@ -135,7 +135,7 @@ export default function SigIn() {
                 ),
               }}
             />
-             <TextField
+            <TextField
               margin="normal"
               fullWidth
               name="segmento"
@@ -146,7 +146,7 @@ export default function SigIn() {
               helperText={errors.segmento?.message}
               sx={{ borderRadius: 1 }}
             />
-             <TextField
+            <TextField
               margin="normal"
               fullWidth
               name="descricao"
@@ -157,6 +157,12 @@ export default function SigIn() {
               helperText={errors.descricao?.message}
               sx={{ borderRadius: 1 }}
             />
+            <a
+              href="/login"
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              <h4>Já possui uma conta? Faça Login</h4>
+            </a>
             <Button
               variant="contained"
               fullWidth
@@ -172,6 +178,9 @@ export default function SigIn() {
                 fontSize: 15,
                 fontFamily: "Sora, sans-serif",
                 fontWeight: 800,
+                "&:hover": {
+                  backgroundColor: "#08F9B0",
+                },
               }}
             >
               Criar Conta

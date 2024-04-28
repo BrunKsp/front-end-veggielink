@@ -26,6 +26,15 @@ export const Card = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  h4 {
+    margin-top: 10px;
+    margin-right: 40px;
+    font-size: 12px;
+    display: flex;
+    align-items: start;
+    font-weight: 800;
+    justify-content: flex-start;
+  }
   @media (max-width: 768px) {
     //width: 90%;
     padding: 5%;
@@ -45,14 +54,13 @@ export const FlexWrap = styled.div`
 `;
 
 export const DivText = styled.div`
-  margin: 5% 0;
   display: flex;
   align-items: center;
   justify-content: center;
   align-items: center;
   width: 100%;
   flex-direction: column;
-  grid-gap: 2vh;
+  //grid-gap: 2vh;
   h1 {
     font-family: "Sora, sans-serif";
     font-weight: 800;
@@ -70,9 +78,7 @@ export const DivText = styled.div`
 `;
 
 export const Image = styled.div`
-  margin-top: 10px;
-  margin-bottom: 10px;
-  height: 30%;
+  height: 20%;
   display: flex;
   align-items: center;
   justify-content: center;

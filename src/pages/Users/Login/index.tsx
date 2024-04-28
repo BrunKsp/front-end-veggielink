@@ -72,7 +72,7 @@ export default function Login() {
             </DivText>
             <Image>
               <Logo
-                src={require("../../../Images/LogoVeggie.png")}
+                src={require("../../../assets/Images/LogoVeggie.png")}
                 alt="logo"
               />
             </Image>
@@ -115,6 +115,12 @@ export default function Login() {
                 ),
               }}
             />
+            <a
+              href="/sigIn"
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              <h4>Não possui uma conta? Cadastre-se</h4>
+            </a>
             <Button
               variant="contained"
               fullWidth
@@ -130,6 +136,9 @@ export default function Login() {
                 fontSize: 15,
                 fontFamily: "Sora, sans-serif",
                 fontWeight: 800,
+                "&:hover": {
+                  backgroundColor: "#08F9B0", 
+                },
               }}
             >
               Login
