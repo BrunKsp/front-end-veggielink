@@ -7,27 +7,27 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import * as yup from "yup";
 
-import { IconButton, InputAdornment } from "@mui/material";
+import { IconButton, InputAdornment, Typography } from "@mui/material";
 import Seo from "../../../components/Seo";
 import { DivText, FlexWrap, Logo, MainPage, Image, Card } from "./styles";
 import { VisibilityOff, Visibility } from "@mui/icons-material";
-import { login } from "../../../services/User";
+import { sigIn } from "../../../services/User";
 interface IForm {
-  nome: string;  
+  name: string;
   email: string;
-  segmento?: string;
-  senha: string;
-  foto?: string;
-  descricao?: string;
+  segment?: string;
+  password: string;
+  photo?: string;
+  description?: string;
 }
 
 const validationSchema = yup.object({
-  nome: yup.string().required("Campo obrigatório"),
+  name: yup.string().required("Campo obrigatório"),
   email: yup.string().required("Campo obrigatório"),
-  senha: yup.string().required("Campo obrigatório"),
-  segmento: yup.string(),
-  foto: yup.string(),
-  descricao : yup.string().length(150),
+  password: yup.string().required("Campo obrigatório"),
+  segment: yup.string(),
+  photo: yup.string(),
+  description: yup.string().max(150, "Máximo de 150 caracteres"),
 });
 
 export default function SigIn() {
@@ -52,10 +52,9 @@ export default function SigIn() {
 
   const submitForm = useCallback(async (data: IForm) => {
     try {
-      const response = await login(data);
-
+      const response = await sigIn(data);
       if (response.status === 200) {
-        console.log("Funciona");
+        window.location.href = "https://www.youtube.com/watch?v=k3bR2h7w-NY"
       }
     } catch (error: any) {
       if (error?.response?.status === 400) {
@@ -64,9 +63,13 @@ export default function SigIn() {
   }, []);
 
   const handleChange =
-    (name: "email" | "senha" |"nome"|"segmento"|"foto"|"descricao") =>
+    (
+      name: "name" | "email" | "password" | "photo" | "description" | "segment"
+    ) =>
     (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-      setValue(name, e.target.value, { shouldValidate: true });
+      setValue(name, e.target.value === "" ? undefined : e.target.value, {
+        shouldValidate: true,
+      });
     };
 
   return (
@@ -76,11 +79,11 @@ export default function SigIn() {
         <Card>
           <FlexWrap>
             <DivText>
-              <h1>Bem Vindo</h1>
+              <h1>Cadastre-se</h1>
             </DivText>
             <Image>
               <Logo
-                src={require("../../../Images/LogoVeggie.png")}
+                src={require("../../../assets/Images/LogoVeggie.png")}
                 alt="logo"
               />
             </Image>
@@ -88,12 +91,18 @@ export default function SigIn() {
               margin="normal"
               required
               fullWidth
-              name="nome"
+              name="name"
               label="Nome"
               type={"text"}
               id="nome"
-              onChange={handleChange("nome")}
-              helperText={errors.nome?.message}
+              onChange={handleChange("name")}
+              helperText={
+                errors.name && (
+                  <Typography variant="body2" color="error">
+                    {errors.name.message}
+                  </Typography>
+                )
+              }
               sx={{ borderRadius: 1 }}
             />
             <TextField
@@ -105,7 +114,13 @@ export default function SigIn() {
               type={"text"}
               id="email"
               onChange={handleChange("email")}
-              helperText={errors.email?.message}
+              helperText={
+                errors.email && (
+                  <Typography variant="body2" color="error">
+                    {errors.email.message}
+                  </Typography>
+                )
+              }
               sx={{ borderRadius: 1 }}
             />
             <TextField
@@ -114,11 +129,17 @@ export default function SigIn() {
               fullWidth
               id="senha"
               label="Senha"
-              name="senha"
+              name="password"
               type={showPassword ? "text" : "password"}
-              onChange={handleChange("senha")}
+              onChange={handleChange("password")}
               autoFocus
-              helperText={errors.senha?.message}
+              helperText={
+                errors.password && (
+                  <Typography variant="body2" color="error">
+                    {errors.password.message}
+                  </Typography>
+                )
+              }
               sx={{ borderRadius: 1 }}
               InputProps={{
                 endAdornment: (
@@ -135,28 +156,46 @@ export default function SigIn() {
                 ),
               }}
             />
-             <TextField
+            <TextField
               margin="normal"
               fullWidth
-              name="segmento"
+              name="segment"
               label="Segmento"
               type={"text"}
               id="segmento"
-              onChange={handleChange("segmento")}
-              helperText={errors.segmento?.message}
+              onChange={handleChange("segment")}
+              helperText={
+                errors.segment && (
+                  <Typography variant="body2" color="error">
+                    {errors.segment?.message}
+                  </Typography>
+                )
+              }
               sx={{ borderRadius: 1 }}
             />
-             <TextField
+            <TextField
               margin="normal"
               fullWidth
-              name="descricao"
+              name="description"
               label="Descricao"
               type={"text"}
               id="descricao"
-              onChange={handleChange("descricao")}
-              helperText={errors.descricao?.message}
+              onChange={handleChange("description")}
+              helperText={
+                errors.description && (
+                  <Typography variant="body2" color="error">
+                    {errors.description?.message}
+                  </Typography>
+                )
+              }
               sx={{ borderRadius: 1 }}
             />
+            <a
+              href="/login"
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              <h4>Já possui uma conta? Faça Login</h4>
+            </a>
             <Button
               variant="contained"
               fullWidth
@@ -172,6 +211,9 @@ export default function SigIn() {
                 fontSize: 15,
                 fontFamily: "Sora, sans-serif",
                 fontWeight: 800,
+                "&:hover": {
+                  backgroundColor: "#08F9B0",
+                },
               }}
             >
               Criar Conta

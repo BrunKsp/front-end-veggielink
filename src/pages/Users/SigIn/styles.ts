@@ -8,12 +8,9 @@ export const MainPage = styled.div`
   min-height: 100vh;
   background-size: cover;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  flex-direction: row;
-  @media (max-width: 768px) {
-    padding: 10px;
-  }
+  padding-top: 50px;
 `;
 
 export const Card = styled.div`
@@ -26,6 +23,15 @@ export const Card = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  h4 {
+    margin-top: 10px;
+    margin-right: 40px;
+    font-size: 12px;
+    display: flex;
+    align-items: start;
+    font-weight: 800;
+    justify-content: flex-start;
+  }
   @media (max-width: 768px) {
     //width: 90%;
     padding: 5%;
@@ -38,41 +44,28 @@ export const FlexWrap = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  width: 100%;
-  @media (max-width: 768px) {
-    width: 90%;
-  }
+  width: 90%;
 `;
 
 export const DivText = styled.div`
-  margin: 5% 0;
+  margin-top: 300px;
   display: flex;
   align-items: center;
   justify-content: center;
   align-items: center;
   width: 100%;
   flex-direction: column;
-  grid-gap: 2vh;
   h1 {
     font-family: "Sora, sans-serif";
     font-weight: 800;
     font-size: 22px;
-  }
-  p {
-    font-family: "Roboto";
-    font-size: 14px;
     text-align: center;
-  }
-
-  @media (max-width: 768px) {
-    margin: 2.5% 0;
   }
 `;
 
+
 export const Image = styled.div`
-  margin-top: 10px;
-  margin-bottom: 10px;
-  height: 30%;
+  height: 20%;
   display: flex;
   align-items: center;
   justify-content: center;
