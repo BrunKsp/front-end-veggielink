@@ -47,7 +47,7 @@ export default function Login() {
       const response = await login(data);
 
       if (response.status === 200) {
-        console.log("Funciona");
+        window.location.href = "https://www.youtube.com/watch?v=1CIIIv9dfzg"
       }
     } catch (error: any) {
       if (error?.response?.status === 400) {

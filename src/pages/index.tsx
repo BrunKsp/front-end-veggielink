@@ -3,12 +3,11 @@ import Seo from "../components/Seo";
 import {
   DivText,
   FlexWrap,
-  Logo,
   MainPage,
-  Image,
   NavBar,
   Monitoramento,
-  Clientes,
+  ImgNavBar,
+  LogoNavBar,
 } from "./styles";
 import { useState } from "react";
 import DrawerPage from "../components/Drawer";
@@ -27,34 +26,30 @@ export default function Home() {
   return (
     <>
       {<Seo title="Pagina inicial" description="inicio App VeggieLink" />}
+      <NavBar>
+        <MenuOutlined onClick={handleOpenDrawer} />
+        <ImgNavBar>
+          <LogoNavBar
+            src={require("../assets/Images/LogoVeggie.png")}
+            alt="logo"
+          />
+        </ImgNavBar>
+        <DrawerPage open={drawerOpen} onClose={handleCloseDrawer} />
+      </NavBar>
       <MainPage>
-        {/* <NavBar>
-          <MenuOutlined onClick={handleOpenDrawer} />
-        </NavBar>
-        <DrawerPage open={drawerOpen} onClose={handleCloseDrawer} /> */}
         <FlexWrap>
           <DivText>
-            <h2>Gerencie e divulgue seus produtos com</h2>
-            <span>o VeggieLink.</span>
+            <h2>Gerencie e divulgue seus produtos de maneira simplificada</h2>
           </DivText>
           <Monitoramento>
-            <h2> Monitore seu produto com tecnologia de ponta</h2>
+            <p> Impulsione seus produtos com a VeggieLink</p>
           </Monitoramento>
-          <Image>
-            <Logo src={require("../assets/Images/ambiental.png")} alt="logo" />
-          </Image>
-          <Clientes>
-            <h2>Encontre o seu cliente perfeito</h2>
-          </Clientes>
-          <Image>
-            <Logo src={require("../assets/Images/feliz.png")} alt="logo" />
-          </Image>
           <Button
             variant="contained"
-            size="large"
+            size="small"
             disableElevation
             onClick={() => {
-              window.location.href = "/signin";
+              window.location.href = "/sigin";
             }}
             sx={{
               mt: 3,
@@ -62,15 +57,14 @@ export default function Home() {
               borderRadius: 2,
               bgcolor: "#08F9B0",
               color: "black",
-              fontSize: 15,
+              fontSize: 20,
               fontFamily: "Sora, sans-serif",
-              fontWeight: 800,
               "&:hover": {
                 backgroundColor: "#08F9B0",
               },
             }}
           >
-            Cadastre-se já
+            Teste a plataforma
           </Button>
         </FlexWrap>
       </MainPage>

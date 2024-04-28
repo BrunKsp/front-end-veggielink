@@ -8,12 +8,9 @@ export const MainPage = styled.div`
   min-height: 100vh;
   background-size: cover;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  flex-direction: row;
-  @media (max-width: 768px) {
-    padding: 10px;
-  }
+  padding-top: 50px;
 `;
 
 export const Card = styled.div`
@@ -47,35 +44,25 @@ export const FlexWrap = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  width: 100%;
-  @media (max-width: 768px) {
-    width: 90%;
-  }
+  width: 90%;
 `;
 
 export const DivText = styled.div`
+  margin-top: 300px;
   display: flex;
   align-items: center;
   justify-content: center;
   align-items: center;
   width: 100%;
   flex-direction: column;
-  //grid-gap: 2vh;
   h1 {
     font-family: "Sora, sans-serif";
     font-weight: 800;
     font-size: 22px;
-  }
-  p {
-    font-family: "Roboto";
-    font-size: 14px;
     text-align: center;
   }
-
-  @media (max-width: 768px) {
-    margin: 2.5% 0;
-  }
 `;
+
 
 export const Image = styled.div`
   height: 20%;
