@@ -48,25 +48,20 @@ export const FlexWrap = styled.div`
 `;
 
 export const DivText = styled.div`
-  width: 90%;
-  max-width: 230px;
   margin-top: 20px;
-  margin-right: 90px;
   display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   font-family: "Sora, sans-serif";
-  word-wrap: break-word;
   h2 {
-    font-size: 32px;
+    font-size: 42px;
     margin: 20px;
     text-align: left;
   }
 `;
 
 export const Monitoramento = styled.div`
-  text-align: center;
+  text-align: left;
   margin-top: 70px;
   font-family: "Sora, sans-serif";
   margin-bottom: 20px;
@@ -74,7 +69,7 @@ export const Monitoramento = styled.div`
   p {
     color: #616161;
     font-size: 24px;
-    text-align: center;
+    text-align: left;
   }
 `;
 
@@ -106,4 +101,9 @@ export const Image = styled.div`
 export const Logo = styled.img`
   width: 25%;
   height: 30%;
+`;
+
+export const Botoes = styled.div`
+  display: flex;
+  gap: 16px;
 `;

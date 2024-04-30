@@ -8,6 +8,7 @@ import {
   Monitoramento,
   ImgNavBar,
   LogoNavBar,
+  Botoes,
 } from "./styles";
 import { useState } from "react";
 import DrawerPage from "../components/Drawer";
@@ -27,7 +28,7 @@ export default function Home() {
     <>
       {<Seo title="Pagina inicial" description="inicio App VeggieLink" />}
       <NavBar>
-        <MenuOutlined onClick={handleOpenDrawer} />
+        <MenuOutlined onClick={handleOpenDrawer} style={{ fontSize: "32px" }} />
         <ImgNavBar>
           <LogoNavBar
             src={require("../assets/Images/LogoVeggie.png")}
@@ -46,19 +47,21 @@ export default function Home() {
           </Monitoramento>
           <Button
             variant="contained"
-            size="small"
+            size="large"
             disableElevation
             onClick={() => {
               window.location.href = "/sigin";
             }}
             sx={{
-              mt: 3,
+              mt: 6,
               mb: 2,
               borderRadius: 2,
               bgcolor: "#08F9B0",
               color: "black",
+              minWidth: 400,
               fontSize: 20,
               fontFamily: "Sora, sans-serif",
+              textTransform: "none",
               "&:hover": {
                 backgroundColor: "#08F9B0",
               },
@@ -66,6 +69,66 @@ export default function Home() {
           >
             Teste a plataforma
           </Button>
+          <DivText>
+            <h2>
+              Transforme a maneira como você cuida dos seus produtos coloniais
+            </h2>
+          </DivText>
+          <Monitoramento>
+            <p>
+              {" "}
+              Você já se perguntou quanto mais você poderia alcançar se seus
+              produtos fossem mais vistos?
+            </p>
+          </Monitoramento>
+          <Botoes>
+            <Button
+              variant="contained"
+              size="large"
+              disableElevation
+              onClick={() => {
+                window.location.href = "/sigin";
+              }}
+              sx={{
+                mt: 6,
+                mb: 2,
+                borderRadius: 2,
+                bgcolor: "#c8c6c6",
+                color: "black",
+                fontSize: 16,
+                fontFamily: "Sora, sans-serif",
+                textTransform: "none",
+                "&:hover": {
+                  backgroundColor: "DEDEDE",
+                },
+              }}
+            >
+              Teste a plataforma
+            </Button>
+            <Button
+              variant="contained"
+              size="large"
+              disableElevation
+              onClick={() => {
+                window.location.href = "/sigin";
+              }}
+              sx={{
+                mt: 6,
+                mb: 2,
+                borderRadius: 2,
+                bgcolor: "#08F9B0",
+                color: "black",
+                fontSize: 16,
+                fontFamily: "Sora, sans-serif",
+                textTransform: "none",
+                "&:hover": {
+                  backgroundColor: "#08F9B0",
+                },
+              }}
+            >
+              Fale com nosso time
+            </Button>
+          </Botoes>
         </FlexWrap>
       </MainPage>
     </>
