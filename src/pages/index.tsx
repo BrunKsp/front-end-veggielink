@@ -13,6 +13,7 @@ import {
 import { useState } from "react";
 import DrawerPage from "../components/Drawer";
 import Button from "@mui/material/Button";
+import Caroussel from "../components/Carousel";
 
 export default function Home() {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -69,6 +70,7 @@ export default function Home() {
           >
             Teste a plataforma
           </Button>
+          <Caroussel></Caroussel>
           <DivText>
             <h2>
               Transforme a maneira como você cuida dos seus produtos coloniais
