@@ -1,65 +1,38 @@
-import styled from "@emotion/styled";
-import { keyframes } from "@emotion/react";
+import styled from 'styled-components';
 
-const slideInRight = keyframes`
-  from {
-    transform: translateX(100%);
-  }
-  to {
-    transform: translateX(0);
-  }
-`;
-
-const slideOutLeft = keyframes`
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-100%);
-  }
-`;
-export const TrocaImagensContainer = styled.div`
-  position: relative;
+// Estilizando o container do carrossel
+export const Container = styled.div`
   width: 100%;
-  height: 20vh;
-  justify-content: flex-start;
-  overflow: hidden;
-  align-items: flex-start;
-  background-size: cover;
-  background-position: center;
-  border-radius: 13px;
-  margin-top: 20px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-  flex-direction: column;
-  /* @media (max-width: 768px) {
-    width: 50%;
-    height: 50vh;
-    justify-content: flex-start;
-    display: none;
-  } */
+  overflow-x: auto; /* Adicionando overflow-x para permitir rolagem horizontal */
 `;
 
-export const TrocaImagensInner = styled.div`
-  display: flex;
+// Estilizando cada slide do carrossel
+export const Slide = styled.div`
+  position: relative;
+  display: flex; /* Usando flexbox para centralizar verticalmente as imagens */
+  justify-content: center; /* Centralizando horizontalmente as imagens */
 `;
 
-export const TrocaImagensItem = styled.div`
-  flex: 0 0 50vw;
-  height: 10%;
-  transition: opacity 1s ease-in-out;
+// Estilizando o bloco cinza para as imagens
+export const ImageContainer = styled.div`
+  position: relative;
+  height: 300px; /* Defina uma altura fixa para todas as imagens */
+  background-color: #ccc; /* Cor de fundo cinza */
+  display: flex; /* Usando flexbox para alinhar as imagens */
+  justify-content: center; /* Centralizando horizontalmente as imagens */
+  align-items: center; /* Centralizando verticalmente as imagens */
+  margin: 0 10px; /* Espaço entre cada imagem */
+`;
 
-  &.visible {
-    opacity: 1;
-    animation-name: ${slideInRight}; /* Aplicando animação de entrada */
-  }
+// Estilizando as imagens dentro dos slides
+export const Image = styled.img`
+  max-width: 100%; /* Definindo a largura máxima da imagem */
+  max-height: 100%; /* Definindo a altura máxima da imagem */
+  object-fit: contain; /* Ajustando o comportamento da imagem para caber no container */
+`;
 
-  &.hidden {
-    opacity: 0;
-    animation-name: ${slideOutLeft}; /* Aplicando animação de saída */
-  }
-
-  @media (max-width: 420px) {
-    flex: 0 0 100%;
-    display: none;
-  }
+// Estilizando para dispositivos móveis
+export const MobileSlide = styled(Slide)`
+  width: 50%;
+  float: left;
 `;

@@ -1,51 +1,54 @@
-import React, { useState, useEffect } from "react";
-import {
-  TrocaImagensContainer,
-  TrocaImagensInner,
-  TrocaImagensItem,
-} from "./styles";
-const Caroussel: React.FC = () => {
+import React, { useRef } from "react";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import { Container, Slide, Image, ImageContainer} from "./styles";
+
+const CarrosselInfinito = () => {
   const imagens = [
-    require("../../assets/Images/feltrin.png"),
-    require("../../assets/Images/yara.png"),
-    require("../../assets/Images/newHolland.jpg"),
     require("../../assets/Images/syngenta.png"),
     require("../../assets/Images/embrapa.png"),
+    require("../../assets/Images/feltrin.png"),
+    require("../../assets/Images/yara.png"),
   ];
-  const [indiceImagem, setIndiceImagem] = useState(0);
 
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setIndiceImagem((prevIndice) => (prevIndice + 1) % imagens.length);
-    }, 5000);
+  const sliderRef = useRef<Slider>(null);
 
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, [imagens.length]);
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 1000, 
+    slidesToShow: 3, 
+    slidesToScroll: 1,
+    autoplay: true, 
+    autoplaySpeed: 0, 
+    draggable: false, 
+    swipe: false, 
+    arrows: false,
+    responsive: [
+      {
+        breakpoint: 768, 
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+    ],
+  };
 
   return (
-    <TrocaImagensContainer>
-      <TrocaImagensInner>
+    <Container>
+      <Slider ref={sliderRef} {...settings}>
         {imagens.map((imagem, index) => (
-          <TrocaImagensItem
-            key={index}
-            className={
-              index >= indiceImagem && index < indiceImagem + 3
-                ? "visible"
-                : "hidden"
-            }
-          >
-            <img
-              src={imagem}
-              alt={`Imagem ${index + 1}`}
-              style={{  width: "100%", height: "100%" }}
-            />
-          </TrocaImagensItem>
+          <Slide key={index}>
+            <ImageContainer>
+              <Image src={imagem} alt={`Imagem ${index + 1}`} />
+            </ImageContainer>
+          </Slide>
         ))}
-      </TrocaImagensInner>
-    </TrocaImagensContainer>
+      </Slider>
+    </Container>
   );
+  
 };
 
-export default Caroussel;
+export default CarrosselInfinito;
