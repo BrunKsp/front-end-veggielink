@@ -24,6 +24,8 @@ export const NavBar = styled.div`
   background-color: #e5e5e5;
   padding: 10px;
   z-index: 1000;
+  max-width: 100%;
+  overflow-x: hidden;
 `;
 
 export const ImgNavBar = styled.div`
