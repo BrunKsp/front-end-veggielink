@@ -108,4 +108,5 @@ export const Logo = styled.img`
 export const Botoes = styled.div`
   display: flex;
   gap: 16px;
+  margin-bottom: 50px;
 `;
