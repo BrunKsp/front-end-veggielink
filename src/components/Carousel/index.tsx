@@ -4,7 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Container, Slide, Image, ImageContainer} from "./styles";
 
-const CarrosselInfinito = () => {
+const CarouselInfinity = () => {
   const imagens = [
     require("../../assets/Images/syngenta.png"),
     require("../../assets/Images/embrapa.png"),
@@ -17,7 +17,7 @@ const CarrosselInfinito = () => {
   const settings = {
     dots: false,
     infinite: true,
-    speed: 1000, 
+    speed: 1500, 
     slidesToShow: 3, 
     slidesToScroll: 1,
     autoplay: true, 
@@ -51,4 +51,4 @@ const CarrosselInfinito = () => {
   
 };
 
-export default CarrosselInfinito;
+export default CarouselInfinity;

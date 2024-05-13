@@ -59,7 +59,7 @@ export default function Home() {
               borderRadius: 2,
               bgcolor: "#08F9B0",
               color: "black",
-              minWidth: 400,
+              minWidth: 350,
               fontSize: 20,
               fontFamily: "Sora, sans-serif",
               textTransform: "none",
@@ -101,7 +101,7 @@ export default function Home() {
                 fontFamily: "Sora, sans-serif",
                 textTransform: "none",
                 "&:hover": {
-                  backgroundColor: "DEDEDE",
+                  backgroundColor: "#c8c6c6",
                 },
               }}
             >
