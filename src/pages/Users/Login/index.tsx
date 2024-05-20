@@ -12,14 +12,15 @@ import Seo from "../../../components/Seo";
 import { DivText, FlexWrap, Logo, MainPage, Image, Card } from "./styles";
 import { VisibilityOff, Visibility } from "@mui/icons-material";
 import { login } from "../../../services/User";
+import { setToken } from "../../../services/api";
 interface IForm {
   email: string;
-  senha: string;
+  password: string;
 }
 
 const validationSchema = yup.object({
   email: yup.string().required("Campo obrigatório"),
-  senha: yup.string().required("Campo obrigatório"),
+  password: yup.string().required("Campo obrigatório"),
 });
 
 export default function Login() {
@@ -44,11 +45,13 @@ export default function Login() {
 
   const submitForm = useCallback(async (data: IForm) => {
     try {
+      console.log("oi", data);
       const response = await login(data);
-
-      if (response.status === 200) {
-        window.location.href = "https://www.youtube.com/watch?v=1CIIIv9dfzg"
-      }
+      const token = response.data.token;
+      localStorage.setItem("authToken", token);
+      setToken(token);
+      console.log(response);
+      window.location.href = "https://www.youtube.com/watch?v=1CIIIv9dfzg";
     } catch (error: any) {
       if (error?.response?.status === 400) {
       }
@@ -56,14 +59,14 @@ export default function Login() {
   }, []);
 
   const handleChange =
-    (name: "email" | "senha") =>
+    (name: "email" | "password") =>
     (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       setValue(name, e.target.value, { shouldValidate: true });
     };
 
   return (
     <>
-      {<Seo title="Criar Conta" description="" />}
+      {<Seo title="Login" description="" />}
       <MainPage>
         <Card>
           <FlexWrap>
@@ -92,13 +95,13 @@ export default function Login() {
               margin="normal"
               required
               fullWidth
-              id="senha"
+              id="password"
               label="Senha"
-              name="senha"
+              name="password"
               type={showPassword ? "text" : "password"}
-              onChange={handleChange("senha")}
+              onChange={handleChange("password")}
               autoFocus
-              helperText={errors.senha?.message}
+              helperText={errors.password?.message}
               sx={{ borderRadius: 1 }}
               InputProps={{
                 endAdornment: (
@@ -137,7 +140,7 @@ export default function Login() {
                 fontFamily: "Sora, sans-serif",
                 fontWeight: 800,
                 "&:hover": {
-                  backgroundColor: "#08F9B0", 
+                  backgroundColor: "#08F9B0",
                 },
               }}
             >

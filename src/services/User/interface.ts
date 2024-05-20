@@ -1,6 +1,6 @@
 export interface ILogin {
   email: string;
-  senha: string;
+  password: string;
 }
 
 export interface ISigIn {
