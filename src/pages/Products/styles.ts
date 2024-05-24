@@ -13,6 +13,12 @@ export const NavBar = styled.div`
   z-index: 1000;
   max-width: 100%;
   overflow-x: hidden;
+  h1 {
+    margin-right: 260px;
+    display: flex;
+    font-family: "Sora, sans-serif";
+    font-size: 34px;
+  }
 `;
 
 export const MainPage = styled.div`

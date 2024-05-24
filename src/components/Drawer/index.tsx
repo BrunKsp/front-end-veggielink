@@ -24,6 +24,12 @@ export default function DrawerPage({ onClose, open }: DrawerPageProps) {
       >
         <Links>
           <a
+            href="/login"
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
+            <h2>Login</h2>
+          </a>
+          <a
             href="https://www.linkedin.com/in/brunok-siqueirap/"
             style={{ textDecoration: "none", color: "inherit" }}
           >

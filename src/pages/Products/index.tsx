@@ -1,9 +1,9 @@
+import React, { useEffect, useState } from "react";
 import { MenuOutlined } from "@ant-design/icons/lib/icons";
 import GridProducts from "../../components/GridProducts";
 import Seo from "../../components/Seo";
 import { MainPage, NavBar } from "./styles";
 import DrawerPage from "../../components/Drawer";
-import { useEffect, useState } from "react";
 import { getProduct } from "../../services/Product";
 
 interface ProductData {
@@ -12,14 +12,14 @@ interface ProductData {
   thumb: string;
 }
 
-interface Props {
-  products: ProductData[];
+interface ProductCategory {
+  [key: string]: ProductData[];
 }
 
-const Products: React.FC<Props> =  ({ products }: Props) => {
+const Products: React.FC = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const [product, setProducts] = useState<ProductData[]>([]);
- 
+  const [productCategories, setProductCategories] = useState<ProductCategory>({});
+
   const handleOpenDrawer = () => {
     setDrawerOpen(true);
   };
@@ -32,7 +32,8 @@ const Products: React.FC<Props> =  ({ products }: Props) => {
     const fetchProducts = async () => {
       try {
         const data = await getProduct();
-        setProducts(data.data);
+        console.log("🚀 ~ fetchProducts ~ data:", data.data);
+        setProductCategories(data.data);
       } catch (error) {
         console.error("Error fetching products:", error);
       }
@@ -47,30 +48,37 @@ const Products: React.FC<Props> =  ({ products }: Props) => {
       <NavBar>
         <MenuOutlined onClick={handleOpenDrawer} style={{ fontSize: "32px" }} />
         <DrawerPage open={drawerOpen} onClose={handleCloseDrawer} />
+        <h1>Produtos</h1>
       </NavBar>
       <MainPage>
-        <GridProducts products={product} category="Mais Vendidos" />
+        {Object.keys(productCategories).map((category) => (
+          <GridProducts
+            key={category}
+            category={category}
+            products={productCategories[category]}
+          />
+        ))}
       </MainPage>
     </>
   );
-}
+};
 
 export async function getServerSideProps() {
   try {
     const data = await getProduct();
     return {
       props: {
-        products: data,
+        products: data.data, // Supondo que `data.data` é o objeto de categorias
       },
     };
   } catch (error) {
     console.error("Error fetching products:", error);
     return {
       props: {
-        products: [],
+        products: {},
       },
     };
   }
 }
 
-export default Products
+export default Products;

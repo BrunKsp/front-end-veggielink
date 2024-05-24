@@ -51,7 +51,7 @@ export default function Login() {
       localStorage.setItem("authToken", token);
       setToken(token);
       console.log(response);
-      window.location.href = "https://www.youtube.com/watch?v=1CIIIv9dfzg";
+      window.location.href = "/products";
     } catch (error: any) {
       if (error?.response?.status === 400) {
       }
