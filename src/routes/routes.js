@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "../pages/Users/Login";
 import SigIn from "../pages/Users/SigIn";
 import Home from "../pages";
-import Products from "../pages/Products";
+import RoutesProducts from "./product";
 
 
 const Routess = () => {
@@ -13,7 +13,7 @@ const Routess = () => {
         <Route path="/" element={<Home />} />
         <Route path="/login/" element={<Login />} />
         <Route path="/sigin/" element={<SigIn />} />
-        <Route path= "/products/" element={<Products />} />
+        <Route path= "/products/*" element={<RoutesProducts />} />
       </Routes>
     </Router>
   );
