@@ -1,15 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import Routess from "./routes/routes";
+import { setToken } from "./services/api";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <Routess />
-  </React.StrictMode>,
-  document.getElementById("root")
-);
+const App = () => {
+  useEffect(() => {
+    const token = localStorage.getItem("authToken");
+    if (token) {
+      setToken(token);
+    }
+  }, []);
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+  return (
+    <React.StrictMode>
+      <Routess />
+    </React.StrictMode>
+  );
+};
+
+ReactDOM.render(<App />, document.getElementById("root"));

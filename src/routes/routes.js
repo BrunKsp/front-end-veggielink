@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "../pages/Users/Login";
 import SigIn from "../pages/Users/SigIn";
 import Home from "../pages";
-import CreateProduct from "../pages/Products/Create";
+import Products from "../pages/Products";
+
 
 const Routess = () => {
   return (
@@ -12,7 +13,7 @@ const Routess = () => {
         <Route path="/" element={<Home />} />
         <Route path="/login/" element={<Login />} />
         <Route path="/sigin/" element={<SigIn />} />
-        <Route path= "/create-product/" element={<CreateProduct />} />
+        <Route path= "/products/" element={<Products />} />
       </Routes>
     </Router>
   );
