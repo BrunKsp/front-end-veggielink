@@ -1,5 +1,5 @@
 import React from "react";
-import { GridItem, ProductImage, GridContainer, Grid } from "./styles";
+import { GridItem, ProductImage, GridContainer, Grid, ProductLink } from "./styles";
 
 interface IProduct {
   id: string;
@@ -19,14 +19,17 @@ const GridProducts: React.FC<IProps> = ({ category, products }) => {
       <Grid>
         {products.map((product) => (
           <GridItem key={product.id}>
-            <ProductImage src={product.thumb} alt={product.name} />
-            {/* <ProductName>{product.name}</ProductName>
-            <ProductCategory>{product.category}</ProductCategory> */}
+            <ProductLink
+              href={`/products/info-product/${product.id}`}
+              style={{ textDecoration: "none" }}
+            >
+              <ProductImage src={product.thumb} alt={product.name} />
+            </ProductLink>
           </GridItem>
         ))}
       </Grid>
     </GridContainer>
   );
-}
+};
 
 export default GridProducts;

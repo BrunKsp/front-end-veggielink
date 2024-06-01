@@ -5,6 +5,7 @@ import Seo from "../../components/Seo";
 import { MainPage, NavBar } from "./styles";
 import DrawerPage from "../../components/Drawer";
 import { getProduct } from "../../services/Product";
+import Notification from "../../components/Notification";
 
 interface ProductData {
   id: string;
@@ -19,7 +20,7 @@ interface ProductCategory {
 const Products: React.FC = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [productCategories, setProductCategories] = useState<ProductCategory>({});
-
+  
   const handleOpenDrawer = () => {
     setDrawerOpen(true);
   };
@@ -32,10 +33,9 @@ const Products: React.FC = () => {
     const fetchProducts = async () => {
       try {
         const data = await getProduct();
-        console.log("🚀 ~ fetchProducts ~ data:", data.data);
         setProductCategories(data.data);
       } catch (error) {
-        console.error("Error fetching products:", error);
+        <Notification type={"error"} content={"Erro ao buscar Produto!"} />
       }
     };
 
