@@ -4,9 +4,7 @@ import { MenuOutlined, SmileOutlined } from "@ant-design/icons/lib/icons";
 import Seo from "../../../components/Seo";
 import DrawerPage from "../../../components/Drawer";
 import { getProductById } from "../../../services/Product";
-import { Button, Card } from "@mui/material";
 import Notification from "../../../components/Notification";
-import { NavBar, MainPage } from "../styles";
 import {
   Header,
   StyledLink,
@@ -14,6 +12,11 @@ import {
   ImageView,
   ProductImage,
   DescriptionView,
+  Card,
+  CardTimeLine,
+  HeaderContainer,
+  NavBar,
+  MainPage,
 } from "./styles";
 import { Timeline } from "antd";
 
@@ -22,6 +25,10 @@ interface ProductData {
   name: string;
   thumb: string;
   description: string;
+  solo: string;
+  fertilizer: string;
+  plantingDate: string;
+  harvestDate: string;
 }
 
 const TimeLineProduct: React.FC = () => {
@@ -41,6 +48,7 @@ const TimeLineProduct: React.FC = () => {
     const fetchProduct = async () => {
       try {
         const data = await getProductById(id as string);
+        console.log(data);
         setProduct(data.data);
       } catch (error) {
         <Notification type={"error"} content={"Erro ao buscar Produto!"} />;
@@ -54,12 +62,14 @@ const TimeLineProduct: React.FC = () => {
     <>
       <Seo title="Produtos" />
       <NavBar>
-        <MenuOutlined onClick={handleOpenDrawer} style={{ fontSize: "32px" }} />
-        <DrawerPage open={drawerOpen} onClose={handleCloseDrawer} />
-        <Header>
+        <MenuOutlined onClick={handleOpenDrawer} style={{ fontSize: "24px" }} />
+        <HeaderContainer>
           <StyledLink href="/products">
             <ProductName>Produtos</ProductName>
           </StyledLink>
+        </HeaderContainer>
+        <DrawerPage open={drawerOpen} onClose={handleCloseDrawer} />
+        <Header>
           <ProductName>/{product?.name}</ProductName>
         </Header>
       </NavBar>
@@ -71,14 +81,13 @@ const TimeLineProduct: React.FC = () => {
           <DescriptionView>
             <p>{product?.description}</p>
           </DescriptionView>
-          <a href="/sigIn" style={{ textDecoration: "none", color: "inherit" }}>
-            <h4>Compre direto com o produtor</h4>
-          </a>
+        </Card>
+        <CardTimeLine>
           <Timeline
             items={[
               {
                 color: "green",
-                children: "Create a services site 2015-09-01",
+                children: `Colhido dia ${product?.harvestDate?.slice(0,10)}`,
               },
               {
                 color: "green",
@@ -97,9 +106,7 @@ const TimeLineProduct: React.FC = () => {
               {
                 children: (
                   <>
-                    <p>Technical testing 1</p>
-                    <p>Technical testing 2</p>
-                    <p>Technical testing 3 2015-09-01</p>
+                     <p>Adubação {product?.fertilizer}</p>
                   </>
                 ),
               },
@@ -107,9 +114,7 @@ const TimeLineProduct: React.FC = () => {
                 color: "gray",
                 children: (
                   <>
-                    <p>Technical testing 1</p>
-                    <p>Technical testing 2</p>
-                    <p>Technical testing 3 2015-09-01</p>
+                    <p>Data de Plantio {product?.plantingDate.slice(0, 10)}</p>
                   </>
                 ),
               },
@@ -117,20 +122,16 @@ const TimeLineProduct: React.FC = () => {
                 color: "gray",
                 children: (
                   <>
-                    <p>Technical testing 1</p>
-                    <p>Technical testing 2</p>
-                    <p>Technical testing 3 2015-09-01</p>
+                    <p>Data de Preparação {product?.plantingDate.slice(0, 10)}</p>
+                    <p>
+                      Preparação do Solo{product?.solo}
+                    </p>
                   </>
                 ),
-              },
-              {
-                color: "#00CCFF",
-                dot: <SmileOutlined />,
-                children: <p>Custom color testing</p>,
               },
             ]}
           />
-        </Card>
+        </CardTimeLine>
       </MainPage>
     </>
   );

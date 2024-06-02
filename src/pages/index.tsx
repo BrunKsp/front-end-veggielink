@@ -29,7 +29,7 @@ export default function Home() {
     <>
       {<Seo title="Pagina inicial" description="inicio App VeggieLink" />}
       <NavBar>
-        <MenuOutlined onClick={handleOpenDrawer} style={{ fontSize: "32px" }} />
+        <MenuOutlined onClick={handleOpenDrawer} style={{ fontSize: "24px" }} />
         <ImgNavBar>
           <LogoNavBar
             src={require("../assets/Images/LogoVeggie.png")}

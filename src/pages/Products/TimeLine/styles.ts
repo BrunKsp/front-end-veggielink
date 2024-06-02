@@ -3,7 +3,6 @@ import styled from "@emotion/styled";
 export const NavBar = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
   position: fixed;
   top: 0;
   left: 0;
@@ -13,6 +12,12 @@ export const NavBar = styled.div`
   z-index: 1000;
   max-width: 100%;
   overflow-x: hidden;
+`;
+
+export const HeaderContainer = styled.div`
+  display: flex;
+  align-items: center;
+  font-size: 24px;
 `;
 
 export const Header = styled.div`
@@ -25,20 +30,19 @@ export const Header = styled.div`
 export const StyledLink = styled.a`
   text-decoration: none;
   color: black;
+  margin-left: 10px;
 `;
 
 export const ProductName = styled.h1`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin-right: 05px;
 `;
 
 export const MainPage = styled.div`
   background-color: #e5e5e5;
   width: 100%;
   height: 100%;
-  /* display: flex; */
   align-items: center;
   justify-content: center;
   padding-top: 50px;
@@ -83,4 +87,20 @@ export const DescriptionView = styled.div`
   margin-top: 40px;
   margin-bottom: 40px;
   text-align: center;
+`;
+
+export const CardTimeLine = styled.div`
+  width: 80%;
+  height: 80vh;
+  padding: 2.5%;
+  background-attachment: fixed;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  @media (max-width: 768px) {
+    padding: 5%;
+  }
 `;

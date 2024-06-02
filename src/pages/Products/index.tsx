@@ -46,7 +46,7 @@ const Products: React.FC = () => {
     <>
       <Seo title="Produtos" />
       <NavBar>
-        <MenuOutlined onClick={handleOpenDrawer} style={{ fontSize: "32px" }} />
+        <MenuOutlined onClick={handleOpenDrawer} style={{ fontSize: "24px" }} />
         <DrawerPage open={drawerOpen} onClose={handleCloseDrawer} />
         <h1>Produtos</h1>
       </NavBar>

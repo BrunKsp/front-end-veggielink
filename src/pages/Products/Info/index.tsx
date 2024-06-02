@@ -6,6 +6,7 @@ import {
   Card,
   DescriptionView,
   Header,
+  HeaderContainer,
   ImageView,
   MainPage,
   NavBar,
@@ -55,12 +56,15 @@ const InfoProduct: React.FC = () => {
     <>
       <Seo title="Produtos" />
       <NavBar>
-        <MenuOutlined onClick={handleOpenDrawer} style={{ fontSize: "32px" }} />
+        <MenuOutlined onClick={handleOpenDrawer} style={{ fontSize: "24px" }} />
+        <HeaderContainer>
+           <StyledLink href="/products">
+          <ProductName>Produtos</ProductName>
+        </StyledLink>
+        </HeaderContainer>
+       
         <DrawerPage open={drawerOpen} onClose={handleCloseDrawer} />
         <Header>
-          <StyledLink href="/products">
-            <ProductName>Produtos</ProductName>
-          </StyledLink>
           <ProductName>/{product?.name}</ProductName>
         </Header>
       </NavBar>

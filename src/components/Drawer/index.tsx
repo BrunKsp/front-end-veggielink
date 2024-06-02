@@ -49,13 +49,21 @@ export default function DrawerPage({ onClose, open }: DrawerPageProps) {
               <h2>Login</h2>
             </a>
           ) : (
-            <a
-              href="/"
-              onClick={handleLogout}
-              style={{ textDecoration: "none", color: "inherit" }}
-            >
-              <h2>Logout</h2>
-            </a>
+            <>
+              <a
+                href="/"
+                onClick={handleLogout}
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
+                <h2>Logout</h2>
+              </a>
+              <a
+                href="/products"
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
+                <h2>Produtos</h2>
+              </a>
+            </>
           )}
           <a
             href="https://www.linkedin.com/in/brunok-siqueirap/"
