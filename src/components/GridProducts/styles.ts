@@ -18,6 +18,7 @@ export const Grid = styled.div`
 `;
 
 export const GridItem = styled.div`
+  position: relative;
   border: 1px solid #ddd;
   border-radius: 8px;
   overflow: hidden;
@@ -27,6 +28,14 @@ export const GridItem = styled.div`
   align-items: center;
   width: 45%;
   height: 100px;
+`;
+
+export const ProductLink = styled.a`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 `;
 
 export const ProductImage = styled.img`

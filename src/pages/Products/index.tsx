@@ -5,6 +5,7 @@ import Seo from "../../components/Seo";
 import { MainPage, NavBar } from "./styles";
 import DrawerPage from "../../components/Drawer";
 import { getProduct } from "../../services/Product";
+import Notification from "../../components/Notification";
 
 interface ProductData {
   id: string;
@@ -19,7 +20,8 @@ interface ProductCategory {
 const Products: React.FC = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [productCategories, setProductCategories] = useState<ProductCategory>({});
-
+  const [loading, setLoading] = useState(false);
+  
   const handleOpenDrawer = () => {
     setDrawerOpen(true);
   };
@@ -30,12 +32,14 @@ const Products: React.FC = () => {
 
   useEffect(() => {
     const fetchProducts = async () => {
+      setLoading(true);
       try {
         const data = await getProduct();
-        console.log("🚀 ~ fetchProducts ~ data:", data.data);
         setProductCategories(data.data);
       } catch (error) {
-        console.error("Error fetching products:", error);
+        <Notification type={"error"} content={"Erro ao buscar Produto!"} />
+      }finally{
+        setLoading(false);
       }
     };
 
@@ -46,13 +50,14 @@ const Products: React.FC = () => {
     <>
       <Seo title="Produtos" />
       <NavBar>
-        <MenuOutlined onClick={handleOpenDrawer} style={{ fontSize: "32px" }} />
+        <MenuOutlined onClick={handleOpenDrawer} style={{ fontSize: "24px" }} />
         <DrawerPage open={drawerOpen} onClose={handleCloseDrawer} />
         <h1>Produtos</h1>
       </NavBar>
       <MainPage>
         {Object.keys(productCategories).map((category) => (
           <GridProducts
+            loading={loading}
             key={category}
             category={category}
             products={productCategories[category]}
@@ -68,7 +73,7 @@ export async function getServerSideProps() {
     const data = await getProduct();
     return {
       props: {
-        products: data.data, // Supondo que `data.data` é o objeto de categorias
+        products: data.data,
       },
     };
   } catch (error) {

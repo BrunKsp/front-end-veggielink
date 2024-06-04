@@ -3,7 +3,6 @@ import styled from "@emotion/styled";
 export const NavBar = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
   position: fixed;
   top: 0;
   left: 0;
@@ -14,11 +13,16 @@ export const NavBar = styled.div`
   max-width: 100%;
   overflow-x: hidden;
   h1 {
-    margin-right: 260px;
+    margin-left: 20px;
     display: flex;
     font-family: "Sora, sans-serif";
-    font-size: 34px;
+    font-size: 24px;
   }
+`;
+export const HeaderContainer = styled.div`
+  display: flex;
+  align-items: center;
+  font-size: 24px;
 `;
 
 export const MainPage = styled.div`

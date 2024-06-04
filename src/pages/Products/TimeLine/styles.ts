@@ -37,14 +37,12 @@ export const ProductName = styled.h1`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin-left: 5px;
 `;
 
 export const MainPage = styled.div`
   background-color: #e5e5e5;
   width: 100%;
   height: 100%;
-  /* display: flex; */
   align-items: center;
   justify-content: center;
   padding-top: 50px;
@@ -89,4 +87,20 @@ export const DescriptionView = styled.div`
   margin-top: 40px;
   margin-bottom: 40px;
   text-align: center;
+`;
+
+export const CardTimeLine = styled.div`
+  width: 80%;
+  height: 80vh;
+  padding: 2.5%;
+  background-attachment: fixed;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  @media (max-width: 768px) {
+    padding: 5%;
+  }
 `;

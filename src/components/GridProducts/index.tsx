@@ -1,5 +1,12 @@
 import React from "react";
-import { GridItem, ProductImage, GridContainer, Grid } from "./styles";
+import { Skeleton } from "antd";
+import {
+  GridItem,
+  ProductImage,
+  GridContainer,
+  Grid,
+  ProductLink,
+} from "./styles";
 
 interface IProduct {
   id: string;
@@ -10,23 +17,36 @@ interface IProduct {
 interface IProps {
   category?: string;
   products: IProduct[];
+  loading: boolean; // Adicione uma propriedade de carregamento
 }
 
-const GridProducts: React.FC<IProps> = ({ category, products }) => {
+const GridProducts: React.FC<IProps> = ({ category, products, loading }) => {
+  console.log(loading);
   return (
     <GridContainer>
-      <h1>{category}</h1>
+      {loading ? (
+        <Skeleton.Input active />
+      ) : (
+        <h1>{category}</h1>
+      )}
       <Grid>
         {products.map((product) => (
           <GridItem key={product.id}>
-            <ProductImage src={product.thumb} alt={product.name} />
-            {/* <ProductName>{product.name}</ProductName>
-            <ProductCategory>{product.category}</ProductCategory> */}
+            {loading ? (
+              <Skeleton.Image active />
+            ) : (
+              <ProductLink
+                href={`/products/info-product/${product.id}`}
+                style={{ textDecoration: "none" }}
+              >
+                <ProductImage src={product.thumb} alt={product.name} />
+              </ProductLink>
+            )}
           </GridItem>
         ))}
       </Grid>
     </GridContainer>
   );
-}
+};
 
 export default GridProducts;
