@@ -20,7 +20,7 @@ jobs:
       with:
         fetch-depth: 0
         token: ${{ secrets.MINHA_CHAVE }}
-        
+
     - name: Configurar Node.js
       uses: actions/setup-node@v3
       with:
@@ -28,14 +28,21 @@ jobs:
 
     - name: Instalar dependências
       run: npm install
-      
+
     - name: Build
       run: npm run build
-      
+
     - name: Configuração git
       run: |
         git config --local user.email "bbrunosiqueira14@gmail.com"
         git config --local user.name "BrunKsp"
+
+    - name: Verificar status do Git
+      run: |
+        if [[ -n "$(git status --porcelain)" ]]; then
+          echo "Git working directory not clean. Exiting."
+          exit 1
+        fi
 
     - name: Versionar manualmente
       id: versionize
@@ -43,7 +50,7 @@ jobs:
         VERSION=$(npm version patch -m "chore(release): %s [skip ci]")
         echo "New version: $VERSION"
         echo "VERSION=$VERSION" >> $GITHUB_ENV
-        
+
     - name: Caso não precise de release
       if: steps.versionize.outcome != 'success'
       run: echo "Skipping Release. No release required."
