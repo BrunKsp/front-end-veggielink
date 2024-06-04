@@ -27,7 +27,12 @@ jobs:
 
     - name: Instalar Standard Version
       run: npm install -g standard-version
-
+      
+    - name: Configuração git
+      run: |
+        git config --local user.email "bbrunosiqueira14@gmail.com"
+        git config --local user.name "BrunKsp"
+        
     - name: Versionar
       id: versionize
       run: standard-version
