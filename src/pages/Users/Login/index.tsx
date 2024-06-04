@@ -13,6 +13,7 @@ import { DivText, FlexWrap, Logo, MainPage, Image, Card } from "./styles";
 import { VisibilityOff, Visibility } from "@mui/icons-material";
 import { login } from "../../../services/User";
 import { setToken } from "../../../services/api";
+import LoadingSpinner from "../../../components/Loader";
 interface IForm {
   email: string;
   password: string;
@@ -25,6 +26,7 @@ const validationSchema = yup.object({
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -44,6 +46,7 @@ export default function Login() {
   });
 
   const submitForm = useCallback(async (data: IForm) => {
+    setLoading(true);
     try {
       console.log("oi", data);
       const response = await login(data);
@@ -55,6 +58,8 @@ export default function Login() {
     } catch (error: any) {
       if (error?.response?.status === 400) {
       }
+    } finally {
+      setLoading(false);
     }
   }, []);
 
@@ -79,73 +84,79 @@ export default function Login() {
                 alt="logo"
               />
             </Image>
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="email"
-              label="Email"
-              type={"text"}
-              id="email"
-              onChange={handleChange("email")}
-              helperText={errors.email?.message}
-              sx={{ borderRadius: 1 }}
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="password"
-              label="Senha"
-              name="password"
-              type={showPassword ? "text" : "password"}
-              onChange={handleChange("password")}
-              autoFocus
-              helperText={errors.password?.message}
-              sx={{ borderRadius: 1 }}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
-                      edge="end"
-                    >
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-            />
-            <a
-              href="/sigIn"
-              style={{ textDecoration: "none", color: "inherit" }}
-            >
-              <h4>Não possui uma conta? Cadastre-se</h4>
-            </a>
-            <Button
-              variant="contained"
-              fullWidth
-              size="large"
-              disableElevation
-              onClick={handleSubmit(submitForm)}
-              sx={{
-                mt: 3,
-                mb: 2,
-                borderRadius: 2,
-                bgcolor: "#08F9B0",
-                color: "black",
-                fontSize: 15,
-                fontFamily: "Sora, sans-serif",
-                fontWeight: 800,
-                "&:hover": {
-                  backgroundColor: "#08F9B0",
-                },
-              }}
-            >
-              Login
-            </Button>
+            {loading ? (
+              <LoadingSpinner></LoadingSpinner>
+            ) : (
+              <>
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="email"
+                  label="Email"
+                  type={"text"}
+                  id="email"
+                  onChange={handleChange("email")}
+                  helperText={errors.email?.message}
+                  sx={{ borderRadius: 1 }}
+                />
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="password"
+                  label="Senha"
+                  name="password"
+                  type={showPassword ? "text" : "password"}
+                  onChange={handleChange("password")}
+                  autoFocus
+                  helperText={errors.password?.message}
+                  sx={{ borderRadius: 1 }}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                          edge="end"
+                        >
+                          {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+                <a
+                  href="/sigIn"
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
+                  <h4>Não possui uma conta? Cadastre-se</h4>
+                </a>
+                <Button
+                  variant="contained"
+                  fullWidth
+                  size="large"
+                  disableElevation
+                  onClick={handleSubmit(submitForm)}
+                  sx={{
+                    mt: 3,
+                    mb: 2,
+                    borderRadius: 2,
+                    bgcolor: "#08F9B0",
+                    color: "black",
+                    fontSize: 15,
+                    fontFamily: "Sora, sans-serif",
+                    fontWeight: 800,
+                    "&:hover": {
+                      backgroundColor: "#08F9B0",
+                    },
+                  }}
+                >
+                  Login
+                </Button>
+              </>
+            )}
           </FlexWrap>
         </Card>
       </MainPage>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { MenuOutlined, SmileOutlined } from "@ant-design/icons/lib/icons";
+import { MenuOutlined } from "@ant-design/icons/lib/icons";
 import Seo from "../../../components/Seo";
 import DrawerPage from "../../../components/Drawer";
 import { getProductById } from "../../../services/Product";
@@ -87,7 +87,7 @@ const TimeLineProduct: React.FC = () => {
             items={[
               {
                 color: "green",
-                children: `Colhido dia ${product?.harvestDate?.slice(0,10)}`,
+                children: `Colhido dia ${product?.harvestDate?.slice(0, 10)}`,
               },
               {
                 color: "green",
@@ -106,7 +106,7 @@ const TimeLineProduct: React.FC = () => {
               {
                 children: (
                   <>
-                     <p>Adubação {product?.fertilizer}</p>
+                    <p>Adubação {product?.fertilizer}</p>
                   </>
                 ),
               },
@@ -122,10 +122,10 @@ const TimeLineProduct: React.FC = () => {
                 color: "gray",
                 children: (
                   <>
-                    <p>Data de Preparação {product?.plantingDate.slice(0, 10)}</p>
                     <p>
-                      Preparação do Solo{product?.solo}
+                      Data de Preparação {product?.plantingDate.slice(0, 10)}
                     </p>
+                    <p>Preparação do Solo{product?.solo}</p>
                   </>
                 ),
               },

@@ -20,6 +20,7 @@ interface ProductCategory {
 const Products: React.FC = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [productCategories, setProductCategories] = useState<ProductCategory>({});
+  const [loading, setLoading] = useState(false);
   
   const handleOpenDrawer = () => {
     setDrawerOpen(true);
@@ -31,11 +32,14 @@ const Products: React.FC = () => {
 
   useEffect(() => {
     const fetchProducts = async () => {
+      setLoading(true);
       try {
         const data = await getProduct();
         setProductCategories(data.data);
       } catch (error) {
         <Notification type={"error"} content={"Erro ao buscar Produto!"} />
+      }finally{
+        setLoading(false);
       }
     };
 
@@ -53,6 +57,7 @@ const Products: React.FC = () => {
       <MainPage>
         {Object.keys(productCategories).map((category) => (
           <GridProducts
+            loading={loading}
             key={category}
             category={category}
             products={productCategories[category]}
@@ -68,7 +73,7 @@ export async function getServerSideProps() {
     const data = await getProduct();
     return {
       props: {
-        products: data.data, // Supondo que `data.data` é o objeto de categorias
+        products: data.data,
       },
     };
   } catch (error) {
