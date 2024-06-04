@@ -3,6 +3,10 @@ name: Versionar e gerar release
 on:
   push:
     branches: ["main"]
+    # Ignorar mudanças no package.json para evitar loop
+    paths-ignore:
+      - 'package.json'
+      - 'CHANGELOG.md'
 
 jobs:
   build:
@@ -27,7 +31,16 @@ jobs:
 
     - name: Instalar Standard Version
       run: npm install -g standard-version
-      
+
+    - name: Verificar mensagem do commit
+      id: check_commit
+      run: |
+        echo "Commit message: ${{ github.event.head_commit.message }}"
+        if [[ "${{ github.event.head_commit.message }}" == *"[skip ci]"* ]]; then
+          echo "Skipping build due to [skip ci] in commit message"
+          exit 0
+        fi
+        
     - name: Configuração git
       run: |
         git config --local user.email "bbrunosiqueira14@gmail.com"
