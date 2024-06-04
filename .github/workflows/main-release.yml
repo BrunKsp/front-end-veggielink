@@ -35,7 +35,7 @@ jobs:
         
     - name: Versionar
       id: versionize
-      run: versionize --changelog-all --skip-dirty  --commit-suffix "[skip ci]"
+      run: standard-version --changelog-all --skip-dirty  --commit-suffix "[skip ci]"
       continue-on-error: false
     
     - name: Caso não precise de release
