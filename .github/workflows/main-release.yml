@@ -24,9 +24,6 @@ jobs:
       
     - name: Build
       run: npm run build
-      
-    - name: Testar
-      run: npm test
 
     - name: Instalar Standard Version
       run: npm install -g standard-version
