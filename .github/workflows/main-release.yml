@@ -3,7 +3,6 @@ name: Versionar e gerar release
 on:
   push:
     branches: ["main"]
-    # Ignorar mudanças no package.json para evitar loop
     paths-ignore:
       - 'package.json'
       - 'CHANGELOG.md'
@@ -13,6 +12,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Checar se o commit contém [skip ci]
+      if: contains(github.event.head_commit.message, '[skip ci]')
+      run: echo "Commit contains [skip ci], skipping build." && exit 0
+
     - uses: actions/checkout@v3
       with:
         fetch-depth: 0
@@ -28,40 +31,27 @@ jobs:
       
     - name: Build
       run: npm run build
-
-    - name: Instalar Standard Version
-      run: npm install -g standard-version
-
-    - name: Verificar mensagem do commit
-      id: check_commit
-      run: |
-        echo "Commit message: ${{ github.event.head_commit.message }}"
-        if [[ "${{ github.event.head_commit.message }}" == *"[skip ci]"* ]]; then
-          echo "Skipping build due to [skip ci] in commit message"
-          exit 0
-        fi
-        
+      
     - name: Configuração git
       run: |
         git config --local user.email "bbrunosiqueira14@gmail.com"
         git config --local user.name "BrunKsp"
-        
-    - name: Versionar
+
+    - name: Versionar manualmente
       id: versionize
-      run: standard-version --changelog-all --skip-dirty --commit-suffix "[skip ci]"
-      continue-on-error: false
-    
+      run: |
+        VERSION=$(npm version patch -m "chore(release): %s [skip ci]")
+        echo "New version: $VERSION"
+        echo "VERSION=$VERSION" >> $GITHUB_ENV
+        
     - name: Caso não precise de release
       if: steps.versionize.outcome != 'success'
       run: echo "Skipping Release. No release required."
 
     - name: Subir alterações no git
       if: steps.versionize.outcome == 'success'
-      uses: ad-m/github-push-action@master
-      with:
-        github_token: ${{ secrets.MINHA_CHAVE }}
-        branch: ${{ github.ref }}
-        tags: true
+      run: |
+        git push origin main --follow-tags
 
     - name: "Criar release"
       if: steps.versionize.outcome == 'success'
@@ -70,31 +60,16 @@ jobs:
         github-token: "${{ secrets.MINHA_CHAVE }}"
         script: |
           try {
-            const tags_url = context.payload.repository.tags_url + "?per_page=1"
-            const result = await github.request(tags_url)
-            const current_tag = result.data[0].name
-            
-            // Check if release already exists
-            const releases = await github.rest.repos.listReleases({
+            const version = process.env.VERSION
+            await github.rest.repos.createRelease({
+              draft: false,
+              generate_release_notes: true,
+              name: version,
               owner: context.repo.owner,
+              prerelease: false,
               repo: context.repo.repo,
+              tag_name: version,
             });
-
-            const existingRelease = releases.data.find(release => release.tag_name === current_tag);
-
-            if (existingRelease) {
-              console.log(`Release for tag ${current_tag} already exists. Skipping creation.`);
-            } else {
-              await github.rest.repos.createRelease({
-                draft: false,
-                generate_release_notes: true,
-                name: current_tag,
-                owner: context.repo.owner,
-                prerelease: false,
-                repo: context.repo.repo,
-                tag_name: current_tag,
-              });
-            }
           } catch (error) {
             core.setFailed(error.message);
           }
