@@ -18,6 +18,7 @@ import DrawerPage from "../../../components/Drawer";
 import { getProductById } from "../../../services/Product";
 import { Button } from "@mui/material";
 import Notification from "../../../components/Notification";
+import { prettyDOM } from "@testing-library/react";
 
 interface ProductData {
   id: string;
@@ -30,6 +31,7 @@ const InfoProduct: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [product, setProduct] = useState<ProductData | null>(null);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
   const handleOpenDrawer = () => {
     setDrawerOpen(true);
@@ -50,8 +52,11 @@ const InfoProduct: React.FC = () => {
     };
 
     fetchProduct();
-  }, [id]);
 
+    const token = sessionStorage.getItem("authToken");
+    setIsLoggedIn(!!token);
+
+  }, [id]);
   return (
     <>
       <Seo title="Produtos" />
@@ -79,11 +84,12 @@ const InfoProduct: React.FC = () => {
           <a href="/sigIn" style={{ textDecoration: "none", color: "inherit" }}>
             <h4>Compre direto com o produtor</h4>
           </a>
-          {/* <Button
+          <Button
             variant="contained"
             fullWidth
             size="small"
             disableElevation
+            href={`/products/timeline-product/${id}`}
             sx={{
               mt: 1,
               mb: 2,
@@ -99,7 +105,30 @@ const InfoProduct: React.FC = () => {
             }}
           >
             Ver Trajetória
-          </Button> */}
+          </Button>
+          {isLoggedIn && (
+            <Button
+              variant="contained"
+              fullWidth
+              size="small"
+              disableElevation
+              sx={{
+                mt: 1,
+                mb: 2,
+                borderRadius: 2,
+                bgcolor: "#08F9B0",
+                color: "black",
+                fontSize: 15,
+                fontFamily: "Sora, sans-serif",
+                fontWeight: 800,
+                "&:hover": {
+                  backgroundColor: "#08F9B0",
+                },
+              }}
+            >
+              Editar
+            </Button>
+          )}
           <Button
             variant="contained"
             fullWidth

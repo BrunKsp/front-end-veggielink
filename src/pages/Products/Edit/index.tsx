@@ -1,36 +1,32 @@
-import { ChangeEvent, useCallback, useState } from "react";
+import { ChangeEvent, useCallback} from "react";
 import { useForm } from "react-hook-form";
+
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import { yupResolver } from "@hookform/resolvers/yup";
-import Notification from "../../../components/Notification";
 
 import * as yup from "yup";
 
-import { Typography } from "@mui/material";
+import {Typography } from "@mui/material";
 import Seo from "../../../components/Seo";
-import { DivText, FlexWrap, MainPage, Image, Card } from "./styles";
-import SelectCategory from "../../../components/SelectCategorys";
-import { createProduct } from "../../../services/Product";
-import { DatePicker, DatePickerProps } from "antd";
+import { DivText, FlexWrap,MainPage, Image, Card } from "./styles";
+
 
 interface IForm {
   name: string;
   description?: string;
-  thumb?: string;
-  categoryId?: string;
-  plantingDate: Date;
+  category?: string;
+  photo?: string;
 }
 
 const validationSchema = yup.object({
   name: yup.string().required("Campo obrigatório"),
-  plantingDate: yup.date().required("Campo obrigatório"),
+  category: yup.string(),
+  photo: yup.string(),
   description: yup.string().max(150, "Máximo de 150 caracteres"),
 });
 
 export default function CreateProduct() {
-  const [categoryId, setCategoryId] = useState<string | undefined>("");
-  const [loading, setLoading] = useState(false);
 
   const {
     handleSubmit,
@@ -41,35 +37,19 @@ export default function CreateProduct() {
     resolver: yupResolver(validationSchema),
   });
 
-  const submitForm = useCallback(
-    async (data: IForm) => {
-      setLoading(true);
-      try {
-        await createProduct({
-          ...data,
-          categoryId: categoryId,
-          thumb:
-            "https://encrypted-tbn1.gstatic.com/licensed-image?q=tbn:ANd9GcSiCTmrd3lHoWVWidcUmlGoA1Z4VFWYDpteFZglQJuoBPp-QtXiR4RpwnzKjXYZQOZ2wwWm9i3Qds2um0k",
-        });
-      } catch (error) {
-        <Notification type={"error"} content={"Erro ao criar Produto!"} />;
-      } finally {
-        setLoading(false);
+  const submitForm = useCallback(async (data: IForm) => {
+    try {
+      
+    } catch (error: any) {
+      if (error?.response?.status === 400) {
       }
-    },
-    [categoryId]
-  );
-
-  const handleCategoryChange = (categoryId: string) => {
-    setCategoryId(categoryId);
-  };
-
-  const onChange: DatePickerProps["onChange"] = (date) => {
-    setValue("plantingDate", date.toDate());
-  };
+    }
+  }, []);
 
   const handleChange =
-    (name: "name" | "thumb" | "description") =>
+    (
+      name: "name" | "photo" | "description" | "category"
+    ) =>
     (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       setValue(name, e.target.value === "" ? undefined : e.target.value, {
         shouldValidate: true,
@@ -78,14 +58,15 @@ export default function CreateProduct() {
 
   return (
     <>
-      <Seo title="Criar Produto" description="Cadastre seu novo produto" />
+      {<Seo title="Criar Produto" description="Cadastre seu novo produto" />}
       <MainPage>
         <Card>
           <FlexWrap>
             <DivText>
               <h1>Cadastrar Produto</h1>
             </DivText>
-            <Image></Image>
+            <Image>
+            </Image>
             <TextField
               margin="normal"
               required
@@ -104,7 +85,7 @@ export default function CreateProduct() {
               }
               sx={{ borderRadius: 1 }}
             />
-            <TextField
+             <TextField
               margin="normal"
               fullWidth
               name="description"
@@ -121,9 +102,23 @@ export default function CreateProduct() {
               }
               sx={{ borderRadius: 1 }}
             />
-            <SelectCategory onChange={handleCategoryChange}></SelectCategory>
-
-              <DatePicker  onChange={onChange} popupStyle={{ width: "500%", marginTop: "16px"}}/>
+            <TextField
+              margin="normal"
+              fullWidth
+              name="category"
+              label="Categoria"
+              type={"text"}
+              id="segmento"
+              onChange={handleChange("category")}
+              helperText={
+                errors.category && (
+                  <Typography variant="body2" color="error">
+                    {errors.category?.message}
+                  </Typography>
+                )
+              }
+              sx={{ borderRadius: 1 }}
+            />
             <Button
               variant="contained"
               fullWidth

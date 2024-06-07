@@ -21,7 +21,7 @@ const Products: React.FC = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [productCategories, setProductCategories] = useState<ProductCategory>({});
   const [loading, setLoading] = useState(false);
-  
+
   const handleOpenDrawer = () => {
     setDrawerOpen(true);
   };
