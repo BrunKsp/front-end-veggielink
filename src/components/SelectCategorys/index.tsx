@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Select, Typography, FormControl, MenuItem, SelectChangeEvent } from "@mui/material";
+import { Select, FormControl, MenuItem, SelectChangeEvent } from "@mui/material";
 import { getAllCategorys } from "../../services/Categorys";
 
 interface Category {
