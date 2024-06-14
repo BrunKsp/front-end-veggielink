@@ -128,55 +128,54 @@ const InfoProduct: React.FC = () => {
                 <QRCode
                   value="https://ant.design/"
                   bgColor="#fff"
-                  style={{display: "none" }}
+                  style={{ display: "none" }}
                 />
-                <Button
-                  variant="contained"
-                  fullWidth
-                  size="large"
-                  onClick={downloadQRCode}
-                  disableElevation
-                  sx={{
-                    mt: 1,
-                    mb: 2,
-                    borderRadius: 2,
-                    bgcolor: "#08F9B0",
-                    color: "black",
-                    fontSize: 15,
-                    fontFamily: "Sora, sans-serif",
-                    fontWeight: 800,
-                    "&:hover": {
-                      backgroundColor: "#08F9B0",
-                    },
-                  }}
-                >
-                  Gerar QRCODE
-                </Button>
               </div>
+              <Button
+                variant="contained"
+                fullWidth
+                size="large"
+                onClick={downloadQRCode}
+                disableElevation
+                sx={{
+                  mt: 1,
+                  mb: 2,
+                  borderRadius: 2,
+                  bgcolor: "#08F9B0",
+                  color: "black",
+                  fontSize: 15,
+                  fontFamily: "Sora, sans-serif",
+                  fontWeight: 800,
+                  "&:hover": {
+                    backgroundColor: "#08F9B0",
+                  },
+                }}
+              >
+                Gerar QRCODE
+              </Button>
+              <Button
+                variant="contained"
+                fullWidth
+                size="small"
+                disableElevation
+                sx={{
+                  mt: 1,
+                  mb: 2,
+                  borderRadius: 2,
+                  bgcolor: "#08F9B0",
+                  color: "black",
+                  fontSize: 15,
+                  fontFamily: "Sora, sans-serif",
+                  fontWeight: 800,
+                  "&:hover": {
+                    backgroundColor: "#08F9B0",
+                  },
+                }}
+              >
+                Editar
+              </Button>
             </>
-          ) : (
-            <Button
-              variant="contained"
-              fullWidth
-              size="small"
-              disableElevation
-              sx={{
-                mt: 1,
-                mb: 2,
-                borderRadius: 2,
-                bgcolor: "#08F9B0",
-                color: "black",
-                fontSize: 15,
-                fontFamily: "Sora, sans-serif",
-                fontWeight: 800,
-                "&:hover": {
-                  backgroundColor: "#08F9B0",
-                },
-              }}
-            >
-              Editar
-            </Button>
-          )}
+          ) : null}
           {!isLoggedIn && (
             <>
               <a
