@@ -44,7 +44,6 @@ export const MainPage = styled.div`
   background-color: #e5e5e5;
   width: 100%;
   height: 100%;
-  /* display: flex; */
   align-items: center;
   justify-content: center;
   padding-top: 50px;
@@ -63,7 +62,6 @@ export const Card = styled.div`
   flex-direction: column;
 
   @media (max-width: 768px) {
-    //width: 90%;
     padding: 5%;
   }
 `;
@@ -76,17 +74,24 @@ export const ImageView = styled.div`
   overflow: hidden;
   width: 200px;
   height: 200px;
+  margin-bottom: 20px;
 `;
 
 export const ProductImage = styled.img`
-  display: flex;
+  display: block;
   object-fit: cover;
   border-radius: 8px;
   width: 100%;
   height: 100%;
 `;
+
 export const DescriptionView = styled.div`
-  margin-top: 40px;
+  margin-top: 20px; 
   margin-bottom: 40px;
   text-align: center;
+  p {
+    word-wrap: break-word;
+    max-width: 300px;
+    margin: 0 auto;
+  }
 `;

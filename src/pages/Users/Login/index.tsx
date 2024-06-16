@@ -61,7 +61,7 @@ export default function Login() {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [navigate]);
 
   const handleChange =
     (name: "email" | "password") =>

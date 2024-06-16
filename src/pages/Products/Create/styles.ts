@@ -1,5 +1,19 @@
 import styled from "@emotion/styled";
 
+export const NavBar = styled.div`
+  display: flex;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #e5e5e5;
+  padding: 10px;
+  z-index: 1000;
+  max-width: 100%;
+  overflow-x: hidden;
+`;
+
 export const MainPage = styled.div`
   background-attachment: fixed;
   background-color: #e5e5e5;
@@ -15,7 +29,8 @@ export const MainPage = styled.div`
 
 export const Card = styled.div`
   width: 80%;
-  height: 80vh;
+  min-height: 100px;
+  //height: 80vh;
   padding: 2.5%;
   background-attachment: fixed;
   background-size: cover;
@@ -48,7 +63,7 @@ export const FlexWrap = styled.div`
 `;
 
 export const DivText = styled.div`
-  margin-top: 300px;
+  margin-bottom: 20px;
   display: flex;
   align-items: center;
   justify-content: center;

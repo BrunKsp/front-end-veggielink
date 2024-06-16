@@ -17,11 +17,10 @@ interface IProduct {
 interface IProps {
   category?: string;
   products: IProduct[];
-  loading: boolean; // Adicione uma propriedade de carregamento
+  loading: boolean;
 }
 
 const GridProducts: React.FC<IProps> = ({ category, products, loading }) => {
-  console.log(loading);
   return (
     <GridContainer>
       {loading ? (

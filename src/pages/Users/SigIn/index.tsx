@@ -66,7 +66,7 @@ export default function SigIn() {
     }finally{
       setLoading(false);
     }
-  }, []);
+  }, [navigate]);
 
   const handleChange =
     (

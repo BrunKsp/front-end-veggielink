@@ -1,6 +1,5 @@
 import { api } from "../api";
 
-
 const url = "products";
 
 export const getProduct = () => {
@@ -13,17 +12,19 @@ export const getProductById = (id: string) => {
       id: id,
     },
   });
-}
+};
 
 export const createProduct = (data: ICreateProduct) => {
-  return api.post(`${url}`,data);
+  return api.post(`${url}`, data);
 };
 
-interface ICreateProduct
-{
+interface ICreateProduct {
   name: string;
   description?: string;
-  plantingDate: Date;
   thumb?: string;
   categoryId?: string;
-};
+  plantingDate: Date;
+  preparingDate: Date;
+  observation: string;
+  fertilizer: string;
+}

@@ -158,6 +158,7 @@ const InfoProduct: React.FC = () => {
                 fullWidth
                 size="small"
                 disableElevation
+                href={`/products/edit-product/${id}`}
                 sx={{
                   mt: 1,
                   mb: 2,

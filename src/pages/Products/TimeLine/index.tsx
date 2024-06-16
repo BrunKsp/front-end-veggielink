@@ -25,10 +25,11 @@ interface ProductData {
   name: string;
   thumb: string;
   description: string;
-  solo: string;
+  observation: string;
   fertilizer: string;
   plantingDate: string;
   harvestDate: string;
+  preparingDate: string;
 }
 
 const TimeLineProduct: React.FC = () => {
@@ -90,16 +91,10 @@ const TimeLineProduct: React.FC = () => {
                 children: `Colhido dia ${product?.harvestDate?.slice(0, 10)}`,
               },
               {
-                color: "green",
-                children: "Create a services site 2015-09-01",
-              },
-              {
                 color: "red",
                 children: (
                   <>
-                    <p>Solve initial network problems 1</p>
-                    <p>Solve initial network problems 2</p>
-                    <p>Solve initial network problems 3 2015-09-01</p>
+                    <p>Observações:{product?.observation}</p>
                   </>
                 ),
               },
@@ -122,10 +117,7 @@ const TimeLineProduct: React.FC = () => {
                 color: "gray",
                 children: (
                   <>
-                    <p>
-                      Data de Preparação {product?.plantingDate.slice(0, 10)}
-                    </p>
-                    <p>Preparação do Solo{product?.solo}</p>
+                    <p>Preparação do Solo{product?.preparingDate}</p>
                   </>
                 ),
               },

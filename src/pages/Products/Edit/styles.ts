@@ -1,5 +1,19 @@
 import styled from "@emotion/styled";
 
+export const NavBar = styled.div`
+  display: flex;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #e5e5e5;
+  padding: 10px;
+  z-index: 1000;
+  max-width: 100%;
+  overflow-x: hidden;
+`;
+
 export const MainPage = styled.div`
   background-attachment: fixed;
   background-color: #e5e5e5;

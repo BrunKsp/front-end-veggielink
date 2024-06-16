@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback} from "react";
+import { ChangeEvent, useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import Button from "@mui/material/Button";
@@ -7,10 +7,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import * as yup from "yup";
 
-import {Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import Seo from "../../../components/Seo";
-import { DivText, FlexWrap,MainPage, Image, Card } from "./styles";
-
+import { DivText, FlexWrap, MainPage, Image, Card, NavBar } from "./styles";
+import { MenuOutlined } from "@ant-design/icons";
+import DrawerPage from "../../../components/Drawer";
 
 interface IForm {
   name: string;
@@ -26,7 +27,8 @@ const validationSchema = yup.object({
   description: yup.string().max(150, "Máximo de 150 caracteres"),
 });
 
-export default function CreateProduct() {
+const EditProduct: React.FC = () => {
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
   const {
     handleSubmit,
@@ -39,7 +41,6 @@ export default function CreateProduct() {
 
   const submitForm = useCallback(async (data: IForm) => {
     try {
-      
     } catch (error: any) {
       if (error?.response?.status === 400) {
       }
@@ -47,26 +48,35 @@ export default function CreateProduct() {
   }, []);
 
   const handleChange =
-    (
-      name: "name" | "photo" | "description" | "category"
-    ) =>
+    (name: "name" | "photo" | "description" | "category") =>
     (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       setValue(name, e.target.value === "" ? undefined : e.target.value, {
         shouldValidate: true,
       });
     };
 
+  const handleOpenDrawer = () => {
+    setDrawerOpen(true);
+  };
+
+  const handleCloseDrawer = () => {
+    setDrawerOpen(false);
+  };
+
   return (
     <>
-      {<Seo title="Criar Produto" description="Cadastre seu novo produto" />}
+      {<Seo title="Editar Produto" description="Edite seu produto" />}
+      <NavBar>
+        <MenuOutlined onClick={handleOpenDrawer} style={{ fontSize: "24px" }} />
+        <DrawerPage open={drawerOpen} onClose={handleCloseDrawer} />
+      </NavBar>
       <MainPage>
         <Card>
           <FlexWrap>
             <DivText>
-              <h1>Cadastrar Produto</h1>
+              <h1>Editar Produto</h1>
             </DivText>
-            <Image>
-            </Image>
+            <Image></Image>
             <TextField
               margin="normal"
               required
@@ -85,7 +95,7 @@ export default function CreateProduct() {
               }
               sx={{ borderRadius: 1 }}
             />
-             <TextField
+            <TextField
               margin="normal"
               fullWidth
               name="description"
@@ -139,11 +149,13 @@ export default function CreateProduct() {
                 },
               }}
             >
-              Criar
+              Editar
             </Button>
           </FlexWrap>
         </Card>
       </MainPage>
     </>
   );
-}
+};
+
+export default EditProduct;
