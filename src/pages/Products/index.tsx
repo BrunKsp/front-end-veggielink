@@ -6,6 +6,7 @@ import { MainPage, NavBar } from "./styles";
 import DrawerPage from "../../components/Drawer";
 import { getProduct } from "../../services/Product";
 import Notification from "../../components/Notification";
+import { Skeleton } from "antd";
 
 interface ProductData {
   id: string;
@@ -19,9 +20,11 @@ interface ProductCategory {
 
 const Products: React.FC = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const [productCategories, setProductCategories] = useState<ProductCategory>({});
+  const [productCategories, setProductCategories] = useState<ProductCategory>(
+    {}
+  );
   const [loading, setLoading] = useState(false);
-  
+
   const handleOpenDrawer = () => {
     setDrawerOpen(true);
   };
@@ -37,8 +40,8 @@ const Products: React.FC = () => {
         const data = await getProduct();
         setProductCategories(data.data);
       } catch (error) {
-        <Notification type={"error"} content={"Erro ao buscar Produto!"} />
-      }finally{
+        <Notification type={"error"} content={"Erro ao buscar Produto!"} />;
+      } finally {
         setLoading(false);
       }
     };
@@ -55,6 +58,7 @@ const Products: React.FC = () => {
         <h1>Produtos</h1>
       </NavBar>
       <MainPage>
+        {loading && <Skeleton></Skeleton>}
         {Object.keys(productCategories).map((category) => (
           <GridProducts
             loading={loading}

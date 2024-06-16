@@ -14,19 +14,22 @@ import { VisibilityOff, Visibility } from "@mui/icons-material";
 import { login } from "../../../services/User";
 import { setToken } from "../../../services/api";
 import LoadingSpinner from "../../../components/Loader";
+import Notification from "../../../components/Notification";
+import { useNavigate } from "react-router-dom";
 interface IForm {
   email: string;
   password: string;
 }
 
 const validationSchema = yup.object({
-  email: yup.string().required("Campo obrigatório"),
+  email: yup.string().required("Campo obrigatório").email("Insira um email valido"),
   password: yup.string().required("Campo obrigatório"),
 });
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -51,17 +54,14 @@ export default function Login() {
       console.log("oi", data);
       const response = await login(data);
       const token = response.data.token;
-      localStorage.setItem("authToken", token);
       setToken(token);
-      console.log(response);
-      window.location.href = "/products";
-    } catch (error: any) {
-      if (error?.response?.status === 400) {
-      }
+      navigate("/products");
+    } catch (error) {
+      <Notification type={"error"} content={"Erro ao buscar Produto!"} />
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [navigate]);
 
   const handleChange =
     (name: "email" | "password") =>

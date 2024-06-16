@@ -29,8 +29,7 @@ export const MainPage = styled.div`
 
 export const Card = styled.div`
   width: 80%;
-  min-height: 100px;
-  //height: 80vh;
+  height: 80vh;
   padding: 2.5%;
   background-attachment: fixed;
   background-size: cover;
@@ -63,7 +62,7 @@ export const FlexWrap = styled.div`
 `;
 
 export const DivText = styled.div`
-  margin-bottom: 20px;
+  margin-top: 300px;
   display: flex;
   align-items: center;
   justify-content: center;

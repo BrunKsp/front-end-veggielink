@@ -65,6 +65,14 @@ export default function DrawerPage({ onClose, open }: DrawerPageProps) {
               </a>
             </>
           )}
+          {isLoggedIn && (
+            <a
+              href="/products/create-product"
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              <h2>Criar Produtos</h2>
+            </a>
+          )}
           <a
             href="https://www.linkedin.com/in/brunok-siqueirap/"
             style={{ textDecoration: "none", color: "inherit" }}
