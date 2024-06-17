@@ -126,7 +126,7 @@ const InfoProduct: React.FC = () => {
             <>
               <div id="myqrcode">
                 <QRCode
-                  value={`https://front-end-veggielink.vercel.app/products/timeline-product/${product.id}`}
+                  value={`https://front-end-veggielink.vercel.app/products/timeline-product/${id}`}
                   bgColor="#fff"
                   style={{ display: "none" }}
                 />
