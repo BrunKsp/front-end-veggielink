@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Skeleton } from "antd";
 import {
   GridItem,
@@ -6,6 +6,9 @@ import {
   GridContainer,
   Grid,
   ProductLink,
+  HeaderContainer,
+  CategoryTitle,
+  MoreLink,
 } from "./styles";
 
 interface IProduct {
@@ -21,15 +24,33 @@ interface IProps {
 }
 
 const GridProducts: React.FC<IProps> = ({ category, products, loading }) => {
+  const [showAllProducts, setShowAllProducts] = useState(false);
+
+  const handleShowMore = () => {
+    setShowAllProducts(true);
+  };
+
+  const productsToDisplay = showAllProducts ? products : products.slice(0, 2);
+
   return (
     <GridContainer>
       {loading ? (
-        <Skeleton.Input active />
+        <>
+          <Skeleton.Input active style={{ width: 200 }} />
+          <Skeleton.Input active style={{ width: 100 }} />
+        </>
       ) : (
-        <h1>{category}</h1>
+        <>
+          <HeaderContainer>
+            {category && <CategoryTitle>{category}</CategoryTitle>}
+            {!showAllProducts && (
+              <MoreLink onClick={handleShowMore}>Ver Mais</MoreLink>
+            )}
+          </HeaderContainer>
+        </>
       )}
       <Grid>
-        {products.map((product) => (
+        {productsToDisplay.map((product) => (
           <GridItem key={product.id}>
             {loading ? (
               <Skeleton.Image active />

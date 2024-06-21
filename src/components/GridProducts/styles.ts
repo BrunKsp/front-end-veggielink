@@ -2,13 +2,6 @@ import styled from "@emotion/styled";
 
 export const GridContainer = styled.div`
   padding: 10px;
-
-  h1 {
-    margin-bottom: 20px;
-    display: flex;
-    font-family: "Sora, sans-serif";
-    font-size: 24px;
-  }
 `;
 
 export const Grid = styled.div`
@@ -53,4 +46,25 @@ export const ProductName = styled.h2`
 
 export const ProductCategory = styled.p`
   color: #555;
+`;
+
+export const HeaderContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const CategoryTitle = styled.h1`
+  margin-bottom: 10px;
+  display: flex;
+  font-family: "Sora, sans-serif";
+  font-size: 24px;
+`;
+
+export const MoreLink = styled.h1`
+  margin-bottom: 8px;
+  display: flex;
+  font-family: "Sora, sans-serif";
+  font-size: 18px;
+  cursor: pointer;
 `;
