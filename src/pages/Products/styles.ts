@@ -29,9 +29,7 @@ export const MainPage = styled.div`
   background-color: #e5e5e5;
   width: 100%;
   height: 100%;
-  /* display: flex; */
   align-items: center;
   justify-content: center;
   padding-top: 50px;
-  margin-left: 20px;
 `;

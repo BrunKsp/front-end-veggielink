@@ -8,14 +8,15 @@ import { getProduct } from "../../services/Product";
 import Notification from "../../components/Notification";
 import { Skeleton } from "antd";
 
-interface ProductData {
+interface IProduct {
   id: string;
   name: string;
   thumb: string;
+  categoryId: string;
 }
 
 interface ProductCategory {
-  [key: string]: ProductData[];
+  [key: string]: IProduct[];
 }
 
 const Products: React.FC = () => {

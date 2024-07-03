@@ -51,7 +51,6 @@ export default function Login() {
   const submitForm = useCallback(async (data: IForm) => {
     setLoading(true);
     try {
-      console.log("oi", data);
       const response = await login(data);
       const token = response.data.token;
       setToken(token);

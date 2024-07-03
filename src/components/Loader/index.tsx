@@ -16,11 +16,11 @@ const SpinnerContainer = styled.div`
 `;
 
 const Spinner = styled.div`
-  border: 4px solid rgba(0, 0, 0, 0.1); /* Cor da borda externa */
-  width: 40px; /* Largura do spinner */
-  height: 40px; /* Altura do spinner */
+  border: 4px solid rgba(0, 0, 0, 0.1); 
+  width: 40px; 
+  height: 40px;
   border-radius: 50%;
-  border-left-color: #08F9B0; /* Cor da parte do spinner que será visível */
+  border-left-color: #08F9B0;
   animation: ${rotate} 1s linear infinite;
 `;
 

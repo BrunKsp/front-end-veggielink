@@ -1,13 +1,35 @@
 import styled from "@emotion/styled";
 
-export const GridContainer = styled.div`
+export const NavBar = styled.div`
+  display: flex;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 95%;
+  background-color: #e5e5e5;
   padding: 10px;
+  z-index: 1000;
+  max-width: 100%;
+  overflow-x: hidden;
+  h1 {
+    margin-left: 20px;
+    display: flex;
+    font-family: "Sora, sans-serif";
+    font-size: 24px;
+  }
+`;
+
+export const GridContainer = styled.div`
+  margin-top: 50px;
+  padding: 10px;
+  margin-left: 8px;
 `;
 
 export const Grid = styled.div`
   display: flex;
-  flex-wrap: nowrap;
-  gap: 8px;
+  flex-wrap: wrap;
+  gap: 10px;
 `;
 
 export const GridItem = styled.div`
@@ -19,7 +41,7 @@ export const GridItem = styled.div`
   box-shadow: 0 4px 2px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
-  width: 45%;
+  width: 17%;
   height: 100px;
 `;
 
