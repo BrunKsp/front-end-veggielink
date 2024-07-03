@@ -10,11 +10,13 @@ import {
   CategoryTitle,
   MoreLink,
 } from "./styles";
+import { useNavigate } from "react-router-dom";
 
 interface IProduct {
   id: string;
   name: string;
   thumb: string;
+  categoryId: string;
 }
 
 interface IProps {
@@ -24,13 +26,12 @@ interface IProps {
 }
 
 const GridProducts: React.FC<IProps> = ({ category, products, loading }) => {
-  const [showAllProducts, setShowAllProducts] = useState(false);
+  const navigate = useNavigate();
+  const productsToDisplay = products.slice(0, 5);
 
-  const handleShowMore = () => {
-    setShowAllProducts(true);
+  const redirect = () => {
+    navigate(`/products/${products[0].categoryId}`);
   };
-
-  const productsToDisplay = showAllProducts ? products : products.slice(0, 2);
 
   return (
     <GridContainer>
@@ -43,9 +44,7 @@ const GridProducts: React.FC<IProps> = ({ category, products, loading }) => {
         <>
           <HeaderContainer>
             {category && <CategoryTitle>{category}</CategoryTitle>}
-            {!showAllProducts && (
-              <MoreLink onClick={handleShowMore}>Ver Mais</MoreLink>
-            )}
+            <MoreLink onClick={redirect}>Ver Mais</MoreLink>
           </HeaderContainer>
         </>
       )}

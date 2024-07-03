@@ -6,11 +6,15 @@ export const getAllCategorys = () => {
   return api.get(`${url}/all`);
 };
 
-export const createCategory = (data: ICreateProduct) => {
+export const createCategory = (data: ICreateCategory) => {
   console.log(data);
   return api.post(`${url}`, data);
 };
 
-interface ICreateProduct {
+export const getCategory = (id: string| undefined) => {
+  return api.get(`${url}?id=${id}`);
+};
+
+interface ICreateCategory {
   name: string;
 }
