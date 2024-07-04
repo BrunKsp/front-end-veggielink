@@ -13,7 +13,6 @@ import {
   DivText,
   FlexWrap,
   MainPage,
-  Image,
   Card,
   NavBar,
   ImageView,
@@ -110,8 +109,10 @@ const EditProduct: React.FC = () => {
     };
 
   const submitForm = useCallback(
+    
     async (data: IForm) => {
       setLoading(true);
+      console.log(imageBase64)
       console.log(data);
       try {
         if (id)
@@ -119,7 +120,9 @@ const EditProduct: React.FC = () => {
             ...data,
             status: 1,
             categoryId: categoryId,
+            thumb: imageBase64,
           });
+          console.log(data);
         navigate(`products/info-product/${id}`);
       } catch (error: any) {
         setNotification({ type: "error", content: "Erro Editar Produto!" });
@@ -127,7 +130,7 @@ const EditProduct: React.FC = () => {
         setLoading(false);
       }
     },
-    [categoryId, id, navigate]
+    [categoryId, id, imageBase64, navigate]
   );
 
   useEffect(() => {

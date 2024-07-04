@@ -47,21 +47,20 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
       uploadTask.on(
         "state_changed",
         (snapshot) => {
-          // Progresso do upload (opcional)
           const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log(`Upload is ${progress}% done`);
+  
         },
         (error) => {
-          // Tratar erros de upload
           setNotification({ type: "error", content: "Erro ao fazer upload da imagem!" });
         },
+        
         () => {
-          // Upload concluído com sucesso, obter a URL do download
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
             setImageBase64(downloadURL);
             onChange(downloadURL);
           });
         }
+       
       );
     }
   };
