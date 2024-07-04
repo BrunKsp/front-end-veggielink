@@ -7,6 +7,8 @@ import {
   UploadIcon,
 } from "./styles";
 import Notification from "../../components/Notification";
+import { storage } from "../../utils/firebaseConfig";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 
 interface ImageUploaderProps {
   onChange: (base64Image: string) => void;
@@ -35,18 +37,32 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
     const file = e.target.files?.[0];
     if (file) {
       setImageFile(file);
-
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        const result = reader.result;
-        if (typeof result === "string") {
-          setImageBase64(result);
-          onChange(result);
-        } else {
-          setNotification({ type: "error", content: "'Erro ao ler a imagem!" });
+  
+      // Cria uma referência ao caminho do arquivo no Firebase Storage
+      const storageRef = ref(storage, `images/${file.name}`);
+  
+      // Faz o upload do arquivo
+      const uploadTask = uploadBytesResumable(storageRef, file);
+  
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          // Progresso do upload (opcional)
+          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log(`Upload is ${progress}% done`);
+        },
+        (error) => {
+          // Tratar erros de upload
+          setNotification({ type: "error", content: "Erro ao fazer upload da imagem!" });
+        },
+        () => {
+          // Upload concluído com sucesso, obter a URL do download
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            setImageBase64(downloadURL);
+            onChange(downloadURL);
+          });
         }
-      };
-      reader.readAsDataURL(file);
+      );
     }
   };
 
