@@ -7,7 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import * as yup from "yup";
 
-import { IconButton, InputAdornment } from "@mui/material";
+import { IconButton, InputAdornment, Typography } from "@mui/material";
 import Seo from "../../../components/Seo";
 import { DivText, FlexWrap, Logo, MainPage, Image, Card } from "./styles";
 import { VisibilityOff, Visibility } from "@mui/icons-material";
@@ -22,14 +22,18 @@ interface IForm {
 }
 
 const validationSchema = yup.object({
-  email: yup.string().required("Campo obrigatório").email("Insira um email valido"),
+  email: yup
+    .string()
+    .required("Campo obrigatório")
+    .email("Insira um email valido"),
   password: yup.string().required("Campo obrigatório"),
 });
 
 export default function Login() {
-  const [showPassword, setShowPassword] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
+  const [loading, setLoading] = useState<boolean>(false);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [notification, setNotification] = useState<{type: "success" | "error" | "warning";content: string;} | null>(null);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -48,19 +52,25 @@ export default function Login() {
     resolver: yupResolver(validationSchema),
   });
 
-  const submitForm = useCallback(async (data: IForm) => {
-    setLoading(true);
-    try {
-      const response = await login(data);
-      const token = response.data.token;
-      setToken(token);
-      navigate("/products");
-    } catch (error) {
-      <Notification type={"error"} content={"Erro ao buscar Produto!"} />
-    } finally {
-      setLoading(false);
-    }
-  }, [navigate]);
+  const submitForm = useCallback(
+    async (data: IForm) => {
+      setLoading(true);
+      setNotification(null);
+      try {
+        var response = await login(data);
+        const token = response.data.token;
+        setToken(token);
+        navigate("/products");
+      } catch (error) {
+        const errorMessage =
+          (error as any).response?.data?.error || "Erro ao efetuar Login!";
+        setNotification({ type: "error", content: errorMessage });
+      } finally {
+        setLoading(false);
+      }
+    },
+    [navigate]
+  );
 
   const handleChange =
     (name: "email" | "password") =>
@@ -72,6 +82,12 @@ export default function Login() {
     <>
       {<Seo title="Login" description="" />}
       <MainPage>
+        {notification && (
+          <Notification
+            type={notification.type}
+            content={notification.content}
+          />
+        )}
         <Card>
           <FlexWrap>
             <DivText>
@@ -96,7 +112,13 @@ export default function Login() {
                   type={"text"}
                   id="email"
                   onChange={handleChange("email")}
-                  helperText={errors.email?.message}
+                  helperText={
+                    errors.email && (
+                      <Typography variant="body2" color="error">
+                        {errors.email.message}
+                      </Typography>
+                    )
+                  }
                   sx={{ borderRadius: 1 }}
                 />
                 <TextField
@@ -109,7 +131,13 @@ export default function Login() {
                   type={showPassword ? "text" : "password"}
                   onChange={handleChange("password")}
                   autoFocus
-                  helperText={errors.password?.message}
+                  helperText={
+                    errors.password && (
+                      <Typography variant="body2" color="error">
+                        {errors.password.message}
+                      </Typography>
+                    )
+                  }
                   sx={{ borderRadius: 1 }}
                   InputProps={{
                     endAdornment: (

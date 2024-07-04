@@ -54,7 +54,7 @@ export default function CreateProduct() {
   const submitForm = useCallback(
     async (data: IForm) => {
       setLoading(true);
-      console.log(data.plantingDate, "data");
+
       try {
         await createProduct({
           ...data,

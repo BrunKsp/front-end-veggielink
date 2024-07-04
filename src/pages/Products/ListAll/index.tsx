@@ -11,11 +11,11 @@ import {
   NavBar,
 } from "./styles";
 import { getCategory } from "../../../services/Categorys";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Seo from "../../../components/Seo";
 import DrawerPage from "../../../components/Drawer";
 import MenuOutlined from "@ant-design/icons/lib/icons/MenuOutlined";
-
+import Notification from "../../../components/Notification";
 interface IProduct {
   id: string;
   name: string;
@@ -29,14 +29,17 @@ interface ICategory {
   products: IProduct[];
 }
 
-
-
 const ListAllProducts: React.FC = () => {
+  const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [loading, setLoading] = useState<boolean>(true);
   const [products, setProducts] = useState<IProduct[]>([]);
   const [categoryName, setCategoryName] = useState<string>("");
+  const [notification, setNotification] = useState<{
+    type: "success" | "error" | "warning";
+    content: string;
+  } | null>(null);
 
   const handleOpenDrawer = () => {
     setDrawerOpen(true);
@@ -54,14 +57,17 @@ const ListAllProducts: React.FC = () => {
         setProducts(categoryData.products);
         setCategoryName(categoryData.name);
       } catch (error) {
-        console.error("Erro ao buscar produtos:", error);
+        setNotification({ type: "error", content: "Erro Ao Buscar Produto!" });
+        setTimeout(() => {
+          navigate("/products");
+        }, 3000);
       } finally {
         setLoading(false);
       }
     };
 
     fetchProducts();
-  }, [id]);
+  }, [id, navigate]);
 
   return (
     <>
@@ -69,8 +75,18 @@ const ListAllProducts: React.FC = () => {
       <NavBar>
         <MenuOutlined onClick={handleOpenDrawer} style={{ fontSize: "24px" }} />
         <DrawerPage open={drawerOpen} onClose={handleCloseDrawer} />
-        <a href="/products"  style={{ textDecoration: "none",color:"black" }}><h1>Produtos</h1></a>
+        <a href="/products" style={{ textDecoration: "none", color: "black" }}>
+          <h1>Produtos</h1>
+        </a>
       </NavBar>
+      <>
+        {notification && (
+          <Notification
+            type={notification.type}
+            content={notification.content}
+          />
+        )}
+      </>
       <GridContainer>
         {loading ? (
           <>
