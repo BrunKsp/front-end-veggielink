@@ -50,6 +50,9 @@ export const Card = styled.div`
     //width: 90%;
     padding: 5%;
   }
+  div {
+    margin-bottom: 5px;
+  }
 `;
 
 export const FlexWrap = styled.div`
@@ -61,8 +64,28 @@ export const FlexWrap = styled.div`
   width: 90%;
 `;
 
+export const ImageView = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  overflow: hidden;
+  width: 200px;
+  height: 200px;
+  margin-bottom: 20px;
+`;
+
+export const ProductImage = styled.img`
+  display: block;
+  object-fit: cover;
+  border-radius: 8px;
+  width: 100%;
+  height: 100%;
+`;
+
 export const DivText = styled.div`
-  margin-top: 300px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -76,7 +99,6 @@ export const DivText = styled.div`
     text-align: center;
   }
 `;
-
 
 export const Image = styled.div`
   height: 20%;

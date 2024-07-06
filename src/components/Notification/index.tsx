@@ -8,11 +8,15 @@ interface NotificationProps {
 
 const Notification: React.FC<NotificationProps> = ({ type, content }) => {
   const [messageApi, contextHolder] = message.useMessage();
-
+  
   useEffect(() => {
     messageApi.open({
       type,
       content,
+      style: {
+        fontSize: '18px', 
+        width: '400px',
+      },
     });
   }, [type, content, messageApi]);
 

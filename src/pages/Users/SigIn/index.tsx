@@ -26,18 +26,26 @@ interface IForm {
 
 const validationSchema = yup.object({
   name: yup.string().required("Campo obrigatório"),
-  email: yup.string().required("Campo obrigatório").email("Insira um email valido"),
-  password: yup.string().required("Campo obrigatório").min(8,"Tamanho minimo de 8 caracteres").max(10,"Tamanho máximo de 10"),
+  email: yup
+    .string()
+    .required("Campo obrigatório")
+    .email("Insira um email valido"),
+  password: yup
+    .string()
+    .required("Campo obrigatório")
+    .min(8, "Tamanho minimo de 8 caracteres")
+    .max(10, "Tamanho máximo de 10"),
   segment: yup.string(),
   photo: yup.string(),
   description: yup.string().max(150, "Máximo de 150 caracteres"),
 });
 
 export default function SigIn() {
-  const [showPassword, setShowPassword] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(false);
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
   const navigate = useNavigate();
+  const [loading, setLoading] = useState<boolean>(false);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const [notification, setNotification] = useState<{type: "success" | "error" | "warning"; content: string; } | null>(null);
 
   const handleMouseDownPassword = (
     event: React.MouseEvent<HTMLButtonElement>
@@ -54,19 +62,24 @@ export default function SigIn() {
     resolver: yupResolver(validationSchema),
   });
 
-  const submitForm = useCallback(async (data: IForm) => {
-    setLoading(true);
-    try {
-      const response = await sigIn(data);
-      const token = response.data.token;
-      setToken(token);
-      navigate("/products");
-    } catch (error) {
-      <Notification type={"error"} content={"Erro ao criar conta!"} />
-    }finally{
-      setLoading(false);
-    }
-  }, [navigate]);
+  const submitForm = useCallback(
+    async (data: IForm) => {
+      setLoading(true);
+      try {
+        const response = await sigIn(data);
+        const token = response.data.token;
+        setToken(token);
+        navigate("/products");
+      } catch (error) {
+        const errorMessage =
+          (error as any).response?.data?.error || "Erro ao criar sua  conta!";
+        setNotification({ type: "error", content: errorMessage });
+      } finally {
+        setLoading(false);
+      }
+    },
+    [navigate]
+  );
 
   const handleChange =
     (
@@ -82,6 +95,12 @@ export default function SigIn() {
     <>
       {<Seo title="Criar Conta" description="" />}
       <MainPage>
+        {notification && (
+          <Notification
+            type={notification.type}
+            content={notification.content}
+          />
+        )}
         <Card>
           <FlexWrap>
             <DivText>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { MenuOutlined } from "@ant-design/icons/lib/icons";
 import Seo from "../../../components/Seo";
 import DrawerPage from "../../../components/Drawer";
@@ -33,9 +33,14 @@ interface ProductData {
 }
 
 const TimeLineProduct: React.FC = () => {
+  const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [product, setProduct] = useState<ProductData | null>(null);
+  const [notification, setNotification] = useState<{
+    type: "success" | "error" | "warning";
+    content: string;
+  } | null>(null);
 
   const handleOpenDrawer = () => {
     setDrawerOpen(true);
@@ -52,12 +57,15 @@ const TimeLineProduct: React.FC = () => {
         console.log(data);
         setProduct(data.data);
       } catch (error) {
-        <Notification type={"error"} content={"Erro ao buscar Produto!"} />;
+        setNotification({ type: "error", content: "Erro Ao Buscar Produto!" });
+        setTimeout(() => {
+          navigate("/products");
+        }, 3000);
       }
     };
 
     fetchProduct();
-  }, [id]);
+  }, [id, navigate]);
 
   return (
     <>
@@ -75,6 +83,12 @@ const TimeLineProduct: React.FC = () => {
         </Header>
       </NavBar>
       <MainPage>
+        {notification && (
+          <Notification
+            type={notification.type}
+            content={notification.content}
+          />
+        )}
         <Card>
           <ImageView>
             <ProductImage src={product?.thumb} alt={product?.name} />
