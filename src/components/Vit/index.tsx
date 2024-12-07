@@ -46,7 +46,7 @@ const ImageUploadWithAntD = () => {
   const sendImageToEndpoint = async (base64Image: string) => {
     try {
       base64Image.replace(/^data:image\/[a-zA-Z]+;base64,/, "");
-      const response = await axios.post("https://3d6f-45-238-139-36.ngrok-free.app/predict", {
+      const response = await axios.post("https://c770-45-238-137-218.ngrok-free.app/predict", {
         image_base64: base64Image,
       });
 
